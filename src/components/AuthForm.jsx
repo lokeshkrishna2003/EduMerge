@@ -1,0 +1,30 @@
+import React, { useState } from 'react';
+import Login from './login/Login';
+import Signup from './Signup/Signup';
+import './Signup/auth.css'
+import heroImageLogin from '../images/image3.png'; // Image for Login
+import heroImageSignup from '../images/image2.png'; // Image for Signup
+
+const AuthForm = () => {
+  const [isLogin, setIsLogin] = useState(true);
+
+  const toggleForm = () => {
+    setIsLogin(!isLogin);
+  };
+
+  return (
+<div className="flex bg-gradient-to-r from-gray-900 to-gray-700 min-h-screen">
+      <div className="w-1/2 relative overflow-hidden">
+<img src={isLogin?heroImageLogin:heroImageSignup} className='image-animation w-full h-full rounded-[40vw]' alt="heroimagealt" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <p className="text-white text-5xl font-bold">{isLogin ? 'Welcome Back!' : 'Join Us!'}</p>
+        </div>
+      </div>
+      <div className="w-1/2 bg-gradient-to-r from-gray-900 to-gray-700 flex items-center justify-center">
+        {isLogin ? <Login toggleForm={toggleForm} /> : <Signup toggleForm={toggleForm} />}
+      </div>
+    </div>
+  );
+};
+
+export default AuthForm;

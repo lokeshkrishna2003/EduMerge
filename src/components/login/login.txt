@@ -1,0 +1,67 @@
+import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import { Link } from "react-router-dom";
+import heroImage from '../images/image1.png'; // Ensure the path to your hero image is correct
+
+const Login = () => {
+  const [credentials, setCredentials] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/login", credentials);
+      navigate('/submit-video'); // Navigate to VideoSubmission page
+      console.log("successful login:", response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    // <div className="min-h-screen flex items-center justify-center bg-cover" style={{ backgroundImage: `url(${heroImage})` }}>
+      <div className=" bg-opacity-80 p-10 rounded-lg shadow-md max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-300 text-center" data-aos="fade-left">Login to EduMerge Studio</h2>
+        <form onSubmit={handleSubmit} className="space-y-4 text-black form-container" data-aos="zoom-out">
+          <input
+            type="text"
+            name="username"
+            value={credentials.username}
+            onChange={handleChange}
+            placeholder="Username or Email"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+          />
+          <input
+            type="password"
+            name="password"
+            value={credentials.password}
+            onChange={handleChange}
+            placeholder="Password"
+            required
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200"
+          />
+          <button
+            type="submit"
+            className="w-full bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-200"
+          >
+            Login
+          </button>
+        </form>
+        <p className="mt-4 text-sm text-center text-gray-400" data-aos='zoom-in'>
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-indigo-500 hover:underline">
+            Sign up
+          </Link>
+        </p>
+      </div>
+    //  </div> 
+  );
+};
+
+export default Login;

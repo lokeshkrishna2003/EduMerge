@@ -1,0 +1,44 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import heroImage from '../../images/image2.png';
+
+
+const Signup = () => {
+  const [userData, setUserData] = useState({ username: '', email: '', password: '' });
+
+  const handleChange = (e) => {
+    setUserData({ ...userData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('http://localhost:3001/register', userData);
+      console.log('successful signup', response.data);
+      // Additional success handling
+    } catch (error) {
+      console.log('signup error', error);
+      // Additional error handling
+    }
+  };
+
+  return (
+    // <div className="min-h-screen flex items-center justify-center bg-cover" style={{ backgroundImage: `url(${heroImage})` }}>
+      <div className=" bg-opacity-80 dynamic-background p-6 rounded-lg shadow-md max-w-md mx-auto">
+        <h2 className="text-2xl font-bold mb-4 text-gray-300 text-center" data-aos="zoom-out">Sign Up for EduMerge Studio</h2>
+        <form onSubmit={handleSubmit} className="space-y-4 form-container" data-aos="zoom-in">
+          <input type="text" name="username" value={userData.username} onChange={handleChange} placeholder="Username" required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" />
+          <input type="email" name="email" value={userData.email} onChange={handleChange} placeholder="Email" required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" />
+          <input type="password" name="password" value={userData.password} onChange={handleChange} placeholder="Password" required className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 transition duration-200" />
+          <button type="submit" className="w-full bg-indigo-500 text-white px-4 py-2 rounded-md hover:bg-indigo-600 transition duration-200">Sign Up</button>
+        </form>
+        <p className="mt-4 text-sm text-center text-gray-400" data-aos='zoom-in'>
+          Already have an account? <Link to="/login" className="text-indigo-500 hover:underline">Login</Link>
+        </p>
+      </div>
+      // </div>
+  );
+};
+
+export default Signup;
