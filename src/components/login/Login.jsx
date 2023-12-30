@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { Link } from "react-router-dom";
-import heroImage from '../../images/image1.png';
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
@@ -55,7 +55,7 @@ const Login = () => {
         </form>
         <p className="mt-6 text-sm text-center text-gray-300">
           Don't have an account?{" "}
-          <Link to="/signup" className="text-purple-400 hover:text-purple-300">
+          <Link to="/auth?mode=signup" className="text-purple-400 hover:text-purple-300">
             Sign up
           </Link>
         </p>

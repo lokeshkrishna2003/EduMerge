@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
-import heroImage from '../../images/image2.png';
+import { Link, useNavigate, } from 'react-router-dom';
+
+
+
 
 const Signup = () => {
   const [userData, setUserData] = useState({ username: '', email: '', password: '' });
@@ -9,12 +11,15 @@ const Signup = () => {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/register', userData);
       console.log('successful signup', response.data);
+      navigate('/submit-video'); 
+
       // Additional success handling
     } catch (error) {
       console.log('signup error', error);
@@ -62,7 +67,7 @@ const Signup = () => {
           </button>
         </form>
         <p className="mt-6 text-sm text-center text-gray-300">
-          Already have an account? <Link to="/login" className="text-purple-400 hover:text-purple-300">Login</Link>
+          Already have an account? <Link to="/auth?mode=login" className="text-purple-400 hover:text-purple-300">Login</Link>
         </p>
       </div>
     </div>

@@ -19,7 +19,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
-        <Route path="/signup" element={<AuthForm />} />
+        <Route path="/auth" element={<AuthForm />} />
         <Route path="/submit-video" element={<VideoSubmission />} />
       </Routes>
     </Router>

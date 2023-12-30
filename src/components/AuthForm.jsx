@@ -4,13 +4,14 @@ import Signup from './Signup/Signup';
 import './Signup/auth.css'
 import heroImageLogin from '../images/image3.png'; // Image for Login
 import heroImageSignup from '../images/image2.png'; // Image for Signup
+import { useLocation } from 'react-router-dom';
 
 const AuthForm = () => {
-  const [isLogin, setIsLogin] = useState(true);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const isLogin = searchParams.get('mode') === 'login';
 
-  const toggleForm = () => {
-    setIsLogin(!isLogin);
-  };
+
 
   return (
 <div className="flex bg-gradient-to-r from-gray-900 to-gray-700 min-h-screen">
@@ -21,7 +22,7 @@ const AuthForm = () => {
         </div>
       </div>
       <div className="w-1/2 bg-gradient-to-r from-gray-900 to-gray-700 flex items-center justify-center">
-        {isLogin ? <Login toggleForm={toggleForm} /> : <Signup toggleForm={toggleForm} />}
+        {isLogin ? <Login  /> : <Signup  />}
       </div>
     </div>
   );

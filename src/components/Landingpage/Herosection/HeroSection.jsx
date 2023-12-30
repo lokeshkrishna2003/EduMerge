@@ -46,7 +46,7 @@ const HeroSection = () => {
   <p className="text-lg md:text-xl text-gray-300 mb-6 animate-fade-in-down animate-slide-up">
     A New Era of Learning Awaits.
   </p>
-  <Link to="/signup" className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded hover:bg-violet-700 transition duration-500 ease-in-out animate-pop-in hover:animate-wiggle">
+  <Link to="/auth?mode=signup" className="inline-block px-6 py-3 bg-violet-600 text-white font-semibold rounded hover:bg-violet-700 transition duration-500 ease-in-out animate-pop-in hover:animate-wiggle">
     Begin Your Journey
   </Link>
 </div>
