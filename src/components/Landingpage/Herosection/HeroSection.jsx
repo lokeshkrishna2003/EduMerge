@@ -16,7 +16,7 @@ const HeroSection = () => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImage((prevImage) => (prevImage + 1) % heroImages.length);
-    }, 5000); // Change image every 5 seconds
+    }, 3000); // Change image every 5 seconds
 
     return () => clearInterval(intervalId); // Cleanup the interval on component unmount
   }, []);
@@ -32,8 +32,8 @@ const HeroSection = () => {
               backgroundImage: `url(${image})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              opacity: index === currentImage ? 0.1 : 0,
-              transition: 'opacity 2s ease-in-out'
+              opacity: index === currentImage ? 0.3 : 0,
+              transition: 'opacity 1s ease-in-out'
             }}
             className="absolute top-0 left-0 w-full h-full">
           </div>
