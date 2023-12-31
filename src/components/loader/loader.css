@@ -1,0 +1,25 @@
+@keyframes spinner {
+    0% {
+      transform: rotate(0deg);
+      border-color: #19D3AE;
+    }
+    25% {
+      border-color: #F59E0B;
+    }
+    50% {
+      border-color: #EF4444;
+    }
+    75% {
+      border-color: #8B5CF6;
+    }
+    100% {
+      transform: rotate(360deg);
+      border-color: #19D3AE;
+    }
+  }
+  
+  .loader {
+    animation: spinner 1s infinite;
+    border-top-color: transparent;
+  }
+  
