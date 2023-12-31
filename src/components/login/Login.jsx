@@ -48,7 +48,10 @@ const Login = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center" data-aos='zoom-out'>
       <div className="bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 p-8 rounded-lg shadow-xl max-w-md mx-auto">
-        <h2 className="text-3xl font-bold text-white mb-6 text-center">
+        {loading ? <ProgressIndicator/> : (
+          <>
+
+<h2 className="text-3xl font-bold text-white mb-6 text-center">
           Login to EduMerge Studio
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -94,6 +97,10 @@ const Login = () => {
             Sign up
           </Link>
         </p>
+          
+          </>
+        )}
+        
       </div>
     </div>
   );
