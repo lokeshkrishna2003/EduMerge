@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
+import ProgressIndicator from "../loader/ProgressIndicator";
+
 
 const Signup = () => {
   const [userData, setUserData] = useState({
@@ -9,6 +11,8 @@ const Signup = () => {
     password: "",
   });
   const [error, setError] = useState(""); // New state for error messages
+  const [loading, setLoading] = useState(false); // New state for loading indicator
+
 
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -18,6 +22,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); //Reset error message on new submission or Clears any existing error messages
+    setLoading(true); // Set loading state to true
     try {
       const response = await axios.post(
         "http://localhost:3001/register",
@@ -34,12 +39,17 @@ const Signup = () => {
         setError("An error occurred during signup."); // Fallback error message
       }
     }
+    finally {
+      setLoading(false); // Stop loading ,set loading state to false
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center" data-aos='zoom-in'>
       <div className="bg-gradient-to-br from-gray-700 via-gray-800 to-gray-900 p-8 rounded-lg shadow-xl max-w-md mx-auto">
-        <h2 className="text-3xl font-bold text-white mb-6 text-center">
+{loading ? <ProgressIndicator /> :(
+  <>
+<h2 className="text-3xl font-bold text-white mb-6 text-center">
           Sign Up for EduMerge Studio
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -77,6 +87,11 @@ const Signup = () => {
             Sign Up
           </button>
         </form>
+  
+  
+  </>
+) } {/* Display loading indicator if loading */}
+        
         <div className="w-full mt-3 h-4">
           {error && (
             <div className="text-red-500 mb-4 text-center" data-aos="zoom-in">

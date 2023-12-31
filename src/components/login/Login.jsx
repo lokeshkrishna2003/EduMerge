@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import ProgressIndicator from "../loader/ProgressIndicator";
+
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -9,6 +11,9 @@ const Login = () => {
     password: "",
   });
   const [error, setError] = useState(""); // New state for error messages
+  const [loading,setLoading] = useState(false) // New state for loading indicator
+
+  
 
   const navigate = useNavigate();
 
@@ -19,6 +24,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(""); //Reset error message on new submission or Clears any existing error messages
+    setLoading(true); // Set loading state to true
     try {
       const response = await axios.post(
         "http://localhost:3001/login",
@@ -32,6 +38,10 @@ const Login = () => {
       } else {
         setError("An error occurred during login."); // Fallback error message
       }
+    }
+    finally{
+      setLoading(false); // stop loading , Set loading state to false
+    
     }
   };
 
