@@ -14,6 +14,7 @@ import AuthForm from "./components/AuthForm";
 import ProgressBar from "./components/ProgressBar";
 import RouteChangeListener from "./RouteChangeListener";
 import ScrollProgress from "./components/ScrollProgress";
+import ScrollIndicator from "./components/ScrollIndicator";
 
 
 
@@ -34,7 +35,7 @@ const App = () => {
     <Router>
       <RouteChangeListener setLoading={setLoading} />
       <ScrollProgress />
-
+      <ScrollIndicator />
 
 <ProgressBar isLoading={isLoading} />
 
