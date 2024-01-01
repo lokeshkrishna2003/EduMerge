@@ -4,7 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import ProgressIndicator from "../loader/ProgressIndicator";
 
 
+
+
 const Signup = () => {
+  
   const [userData, setUserData] = useState({
     username: "",
     email: "",
