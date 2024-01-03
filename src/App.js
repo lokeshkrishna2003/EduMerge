@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 
 
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -15,6 +16,7 @@ import ProgressBar from "./components/ProgressBar";
 import RouteChangeListener from "./RouteChangeListener";
 import ScrollProgress from "./components/ScrollProgress";
 import ScrollIndicator from "./components/ScrollIndicator";
+import UserDashboard from "./components/dashboard/UserDashboard";
 
 
 
@@ -42,7 +44,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthForm />} />
-        <Route path="/submit-video" element={<VideoSubmission />} />
+        {/* <Route path="/submit-video" element={<VideoSubmission />} /> */}
+        <Route path="/user/dashboard" element={<UserDashboard />} />
       </Routes>
     </Router>
   );

@@ -7,7 +7,7 @@ const ScrollIndicator = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   // Define non-scrollable routes
-  const nonScrollableRoutes = ['/auth?mode=login', '/sauth?mode=signup'];
+  const nonScrollableRoutes = ['auth?mode=login', '/sauth?mode=signup'];
 
   useEffect(() => {
     const checkScrollable = () => {

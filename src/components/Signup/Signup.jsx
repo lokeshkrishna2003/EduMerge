@@ -32,7 +32,7 @@ const Signup = () => {
         userData
       );
       console.log("successful signup", response.data);
-      navigate("/submit-video");
+      navigate("/user/dashboard");
 
       // Additional success handling
     } catch (error) {

@@ -31,7 +31,7 @@ const Login = () => {
         "http://localhost:3001/login",
         credentials
       );
-      navigate("/submit-video");
+      navigate("/user/dashboard");
       console.log("successful login:", response.data);
     } catch (error) {
       if (error.response && error.response.data) {
