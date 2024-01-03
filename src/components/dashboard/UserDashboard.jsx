@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import PlaylistCard from "./PlaylistCard"; // Ensure correct path
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
+import { FiPlus } from 'react-icons/fi'; // Importing plus icon
+
 import "aos/dist/aos.css";
 import AOS from "aos";
 
@@ -27,6 +29,12 @@ const UserDashboard = () => {
     { id: 5, name: "Old Classics",videoCount:'4' },
   ];
 
+  const handleCreatePlaylist = () => {
+    // Logic to handle creating a new playlist
+window.prompt('button was clicked',1+1)
+
+};
+
   // Close settings dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -34,6 +42,7 @@ const UserDashboard = () => {
         setShowSettings(false);
       }
     };
+
 
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -101,10 +110,11 @@ const UserDashboard = () => {
           ))}
         </div>
 
-        {/* Create Playlist Button */}
-        <button className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-          Create Playlist
-        </button>
+                    {/* Floating Action Button */}
+                    <button onClick={handleCreatePlaylist} 
+                    className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300">
+                <FiPlus size={35} />
+            </button>
       </div>
     </div>
   );
