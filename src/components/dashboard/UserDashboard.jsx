@@ -13,6 +13,7 @@ AOS.init();
 
 const UserDashboard = () => {
     const [userName, setUsername] = useState("");
+    
   const [showSettings, setShowSettings] = useState(false);
   const settingsRef = useRef();
 
@@ -20,7 +21,7 @@ const UserDashboard = () => {
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
-    if (hour < 15) return "Good Afternoon";
+    if (hour < 16) return "Good Afternoon";
     return "Good Evening";
   };
 
