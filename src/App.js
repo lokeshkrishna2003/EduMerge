@@ -19,6 +19,7 @@ import ScrollIndicator from "./components/ScrollIndicator";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import UpdateProfile from "./components/dashboard/UpdateProfile";
 import ChangePassword from "./components/dashboard/ChangePassword";
+import DeleteAccount from "./components/dashboard/DeleteAccount";
 
 
 
@@ -50,6 +51,7 @@ const App = () => {
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/update-profile" element={<UpdateProfile />} />
         <Route path="/user/change-password" element={<ChangePassword/>} />
+        <Route path="/user/delete-account" element={<DeleteAccount/>} />
 
       </Routes>
     </Router>
