@@ -18,8 +18,8 @@ const ChangePassword = () => {
 
     try {
       const userId = localStorage.getItem('userId');
-      console.log(userId)
-      await axios.put(`http://localhost:3001/user/change-password/`, {
+
+      await axios.put(`http://localhost:3001/user/change-password/${userId}`, {
         userId,
         ...passwordData
       });
