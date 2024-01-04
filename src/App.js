@@ -18,6 +18,7 @@ import ScrollProgress from "./components/ScrollProgress";
 import ScrollIndicator from "./components/ScrollIndicator";
 import UserDashboard from "./components/dashboard/UserDashboard";
 import UpdateProfile from "./components/dashboard/UpdateProfile";
+import ChangePassword from "./components/dashboard/ChangePassword";
 
 
 
@@ -48,6 +49,8 @@ const App = () => {
         {/* <Route path="/submit-video" element={<VideoSubmission />} /> */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/update-profile" element={<UpdateProfile />} />
+        <Route path="/user/change-password" element={<ChangePassword/>} />
+
       </Routes>
     </Router>
   );
