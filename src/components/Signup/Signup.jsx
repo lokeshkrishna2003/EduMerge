@@ -31,6 +31,7 @@ const Signup = () => {
         "http://localhost:3001/register",
         userData
       );
+      localStorage.setItem("userId", response.data.userId); // Store userId in localStorage
       console.log("successful signup", response.data);
       navigate("/user/dashboard");
 

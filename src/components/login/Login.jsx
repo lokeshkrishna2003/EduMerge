@@ -31,6 +31,7 @@ const Login = () => {
         "http://localhost:3001/login",
         credentials
       );
+      localStorage.setItem("userId", response.data.userId); // Store userId in localStorage
       navigate("/user/dashboard");
       console.log("successful login:", response.data);
     } catch (error) {
