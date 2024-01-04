@@ -1,20 +1,47 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { FaUser, FaEnvelope } from 'react-icons/fa';
-
+import axios from 'axios';
 const UpdateProfile = () => {
-  const dummyUserData = { username: 'JohnDoe', email: 'johndoe@example.com' };
-  const [userData, setUserData] = useState(dummyUserData);
-  const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    setUserData({ ...userData, [e.target.name]: e.target.value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Updated Data:', userData);
-    // Here you would handle form submission
-  };
+    const [userData, setUserData] = useState({ username: '', email: '' });
+    const [error, setError] = useState('');
+  
+    useEffect(() => {
+      // Fetch the user's ID from local storage
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        // Fetch existing user data from the backend
+        axios.get(`http://localhost:3001/user/${userId}`)
+          .then(response => {
+            setUserData({ username: response.data.username, email: response.data.email });
+          })
+          .catch(error => {
+            setError('Failed to fetch user data');
+            console.error('Error fetching user data:', error);
+          });
+      }
+    }, []);
+  
+    const handleChange = (e) => {
+      setUserData({ ...userData, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        setError('User ID not found');
+        return;
+      }
+      try {
+        const response = await axios.put(`http://localhost:3001/user/update-profile/${userId}`, userData);
+        console.log('Profile Updated:', response.data);
+        setError('');
+      } catch (error) {
+        setError('Failed to update profile');
+        console.error('Error updating profile:', error);
+      }
+    };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black" data-aos='zoom-out'>
