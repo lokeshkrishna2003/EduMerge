@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { FaLock } from 'react-icons/fa';
+import axios from 'axios';
 
 const ChangePassword = () => {
   const [passwordData, setPasswordData] = useState({ oldPassword: '', newPassword: '' });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleChange = (e) => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
@@ -11,8 +13,23 @@ const ChangePassword = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Password Data:', passwordData);
-    // Here you would handle the password change logic
+    setError('');
+    setSuccess('');
+
+    try {
+      const userId = localStorage.getItem('userId');
+      console.log(userId)
+      await axios.put(`http://localhost:3001/user/change-password/`, {
+        userId,
+        ...passwordData
+      });
+
+      setSuccess('Password updated successfully.');
+      // Clear form fields after successful update
+      setPasswordData({ oldPassword: '', newPassword: '' });
+    } catch (error) {
+      setError('Failed to update password. ' + (error.response?.data || ''));
+    }
   };
 
   return (
@@ -43,6 +60,7 @@ const ChangePassword = () => {
             />
           </div>
           {error && <div className="text-red-500 mt-4 mb-6 text-center">{error}</div>}
+          {success && <div className="text-green-500 mt-4 mb-6 text-center">{success}</div>}
           <button
             type="submit"
             className="bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 flex items-center justify-center w-full text-lg"
