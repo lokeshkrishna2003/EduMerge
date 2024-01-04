@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import PlaylistCard from "./PlaylistCard"; // Ensure correct path
+
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
 import axios from "axios";
 import { FiPlus } from "react-icons/fi"; // Importing plus icon
 
 import "aos/dist/aos.css";
 import AOS from "aos";
+import { Link } from "react-router-dom";
 
 AOS.init();
 
@@ -91,13 +93,26 @@ const UserDashboard = () => {
             <div className="absolute right-[6rem] mt-12 py-5 w-48 border-1 bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-xl transition-all ease-in-out duration-300">
               <ul>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
+                    <Link to='/user/change-password' >
+
                   Change Password
+                    </Link>
                 </li>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                  update Profile
+                    <Link to='/user/update-profile' >
+
+                  Update Profile
+                    </Link>
                 </li>
+                
+            
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
+                    <Link to='/user/delete-account' >
+
                   Delete Account
+                    </Link>
+                
+
                 </li>
               </ul>
             </div>

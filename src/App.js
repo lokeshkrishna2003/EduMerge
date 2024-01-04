@@ -17,6 +17,7 @@ import RouteChangeListener from "./RouteChangeListener";
 import ScrollProgress from "./components/ScrollProgress";
 import ScrollIndicator from "./components/ScrollIndicator";
 import UserDashboard from "./components/dashboard/UserDashboard";
+import UpdateProfile from "./components/dashboard/UpdateProfile";
 
 
 
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/auth" element={<AuthForm />} />
         {/* <Route path="/submit-video" element={<VideoSubmission />} /> */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
+        <Route path="/user/update-profile" element={<UpdateProfile />} />
       </Routes>
     </Router>
   );
