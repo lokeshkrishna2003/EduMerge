@@ -94,10 +94,7 @@ const UserDashboard = () => {
                   Change Password
                 </li>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                  Change Username
-                </li>
-                <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                  Change Email
+                  update Profile
                 </li>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
                   Delete Account
