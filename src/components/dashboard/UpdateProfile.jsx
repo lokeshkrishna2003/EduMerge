@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { FaUser, FaEnvelope } from 'react-icons/fa';
 import axios from 'axios';
+import isAuthenticated from '../../auth';
 const UpdateProfile = () => {
     const [userData, setUserData] = useState({ username: '', email: '' });
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
+    const navigate = useNavigate();
   
     useEffect(() => {
       // Fetch the user's ID from local storage
@@ -21,13 +24,23 @@ const UpdateProfile = () => {
           });
       }
     }, []);
+
+    useEffect(()=>{
+if(!isAuthenticated()){
+navigate('/')
+}
+    },[navigate] )
   
     const handleChange = (e) => {
       setUserData({ ...userData, [e.target.name]: e.target.value });
+      //navigating user to dashboard after succesful updation of profile
+
     };
   
     const handleSubmit = async (e) => {
       e.preventDefault();
+      setSuccess('')
+      setError('')
       const userId = localStorage.getItem('userId');
       if (!userId) {
         setError('User ID not found');
@@ -35,8 +48,14 @@ const UpdateProfile = () => {
       }
       try {
         const response = await axios.put(`http://localhost:3001/user/update-profile/${userId}`, userData);
-        console.log('Profile Updated:', response.data);
-        setError('');
+        setSuccess('Profile updated successfully');
+        setTimeout(()=>{
+          if(isAuthenticated()){
+            navigate('/user/dashboard')
+          }
+        },1500)
+
+
       } catch (error) {
         setError('Failed to update profile');
         console.error('Error updating profile:', error);
@@ -70,7 +89,10 @@ const UpdateProfile = () => {
               className="pl-10 pr-4 py-3 w-full bg-transparent border-none text-white focus:outline-none text-lg"
             />
           </div>
-          {error && <div className="text-red-500 mt-4 mb-6 text-center">{error}</div>}
+          <div className=' flex justify-center items-center w-[100%] h-[5vh]  text-center' >
+          {error && <div className="text-red-500  " data-aos='zoom-in'>{error}</div>}
+          {success && <div className="text-green-500 " data-aos='zoom-in'>{success}</div>}
+          </div>
           <button
             type="submit"
             className="w-full bg-purple-500 text-white px-8 py-4 rounded-full hover:bg-purple-600 transition duration-300 flex items-center justify-center w-full text-lg"
