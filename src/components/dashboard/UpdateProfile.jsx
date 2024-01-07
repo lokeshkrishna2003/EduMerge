@@ -25,11 +25,12 @@ const UpdateProfile = () => {
       }
     }, []);
 
-    useEffect(()=>{
-if(!isAuthenticated()){
-navigate('/')
-}
-    },[navigate] )
+//     useEffect(()=>{
+// if(!isAuthenticated()){
+// navigate('/')
+// }
+
+//     },[navigate] )
   
     const handleChange = (e) => {
       setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -50,9 +51,10 @@ navigate('/')
         const response = await axios.put(`http://localhost:3001/user/update-profile/${userId}`, userData);
         setSuccess('Profile updated successfully');
         setTimeout(()=>{
-          if(isAuthenticated()){
-            navigate('/user/dashboard')
-          }
+          // if(isAuthenticated()){
+          //   navigate('/user/dashboard')
+          console.log(1+1)
+          
         },1500)
 
 

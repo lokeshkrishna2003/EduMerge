@@ -1,15 +1,16 @@
 import React, { useState, useRef, useEffect } from "react";
 import PlaylistCard from "./PlaylistCard"; // Ensure correct path
 
+
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FiPlus } from "react-icons/fi"; // Importing plus icon
 
 import "aos/dist/aos.css";
 import AOS from "aos";
-import { Link } from "react-router-dom";
+
 import isAuthenticated from "../../auth";
 
 AOS.init();
@@ -39,8 +40,9 @@ const UserDashboard = () => {
   ];
 
   const handleCreatePlaylist = () => {
-    // Logic to handle creating a new playlist
-    window.prompt("button was clicked", 1 + 1);
+//navigating to create playlist page
+    navigate('/user/create-playlist');
+    
   };
 
   // Close settings dropdown when clicking outside
@@ -168,7 +170,9 @@ const UserDashboard = () => {
           onClick={handleCreatePlaylist}
           className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
         >
+
           <FiPlus size={35} />
+
         </button>
       </div>
     </div>
