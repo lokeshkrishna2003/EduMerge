@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import { FaUserCircle, FaEnvelope, FaTrash } from 'react-icons/fa';
 import { useNavigate} from 'react-router-dom';
+
 import axios from 'axios';
+import isAuthenticated from '../../auth';
 
 const DeleteAccount = () => {
   const [userData, setUserData] = useState({ username: '', email: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const Navigate = useNavigate();
+  const navigate = useNavigate();
+
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userId = localStorage.getItem('userId');
-        const response = await axios.get(`http://localhost:3001/user/${userId}`);
-        setUserData(response.data);
-      } catch (error) {
-        setError('Failed to fetch user data. ' + (error.response?.data || ''));
-      }
-    };
+    if (!isAuthenticated()) {
+      navigate('/'); // Redirect to landing page if not authenticated
+    } else {
+      const fetchUserData = async () => {
+        try {
+          const userId = localStorage.getItem('userId');
+          const response = await axios.get(`http://localhost:3001/user/${userId}`);
+          setUserData(response.data);
+        } catch (error) {
+          setError('Failed to fetch user data. ' + (error.response?.data || ''));
+        }
+      };
 
-    fetchUserData();
-  }, []);
+      fetchUserData();
+    }
+  }, [navigate]);
+
 
   const handleDelete = async () => {
     setError('');
@@ -35,6 +43,7 @@ const DeleteAccount = () => {
       // Clear local storage and redirect as needed
       localStorage.removeItem('userId');
       // Redirect to the login page or landing page
+      navigate('/');
     } catch (error) {
       setError('Failed to delete account. ' + (error.response?.data || ''));
     }
