@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaLock } from 'react-icons/fa';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import isAuthenticated from '../../auth';
+
 
 const ChangePassword = () => {
   const [passwordData, setPasswordData] = useState({ oldPassword: '', newPassword: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setPasswordData({ ...passwordData, [e.target.name]: e.target.value });
   };
+
+  useEffect(()=>{
+    if(!isAuthenticated()){
+      navigate('/');
+    }
+  
+  },[navigate])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +38,12 @@ const ChangePassword = () => {
       setSuccess('Password updated successfully.');
       // Clear form fields after successful update
       setPasswordData({ oldPassword: '', newPassword: '' });
+      // Redirect to the landingpage after succesful changing of password
+      setTimeout(() => {
+        navigate('/')
+      },1500)
+      //clearing the local storage after changing the password
+      localStorage.clear();
     } catch (error) {
       setError('Failed to update password. ' + (error.response?.data || ''));
     }
@@ -59,8 +76,8 @@ const ChangePassword = () => {
               className="pl-10 pr-4 py-3 w-full bg-transparent border-none text-white focus:outline-none text-lg"
             />
           </div>
-          {error && <div className="text-red-500 mt-4 mb-6 text-center">{error}</div>}
-          {success && <div className="text-green-500 mt-4 mb-6 text-center">{success}</div>}
+          {error && <div className="text-red-500 mt-4 w-[100%] mb-6 text-center" data-aos='zoom-in'>{error}</div>}
+          {success && <div className="text-green-500 mt-4 mb-6 text-center" data-aos='zoom-in' >{success}</div>}
           <button
             type="submit"
             className="bg-purple-500 text-white px-6 py-3 rounded-full hover:bg-purple-600 transition duration-300 flex items-center justify-center w-full text-lg"
