@@ -1,13 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUserCircle, FaEnvelope, FaTrash } from 'react-icons/fa';
+import { useNavigate} from 'react-router-dom';
+import axios from 'axios';
 
 const DeleteAccount = () => {
-  const dummyUserData = { username: 'JohnDoe', email: 'johndoe@example.com' };
-  const [userData] = useState(dummyUserData);
+  const [userData, setUserData] = useState({ username: '', email: '' });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const Navigate = useNavigate();
 
-  const handleDelete = () => {
-    console.log('Delete Account Initiated for:', userData);
-    // Handle account deletion logic here
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userId = localStorage.getItem('userId');
+        const response = await axios.get(`http://localhost:3001/user/${userId}`);
+        setUserData(response.data);
+      } catch (error) {
+        setError('Failed to fetch user data. ' + (error.response?.data || ''));
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleDelete = async () => {
+    setError('');
+    setSuccess('');
+
+    try {
+      const userId = localStorage.getItem('userId');
+      await axios.delete(`http://localhost:3001/user/delete-account/${userId}`, { data: { userId } });
+
+      setSuccess('Account deleted successfully.');
+      // Clear local storage and redirect as needed
+      localStorage.removeItem('userId');
+      // Redirect to the login page or landing page
+    } catch (error) {
+      setError('Failed to delete account. ' + (error.response?.data || ''));
+    }
   };
 
   return (
@@ -18,6 +48,8 @@ const DeleteAccount = () => {
           <h2 className="text-3xl font-bold text-white mb-3">{userData.username}</h2>
           <p className="text-lg text-gray-400">{userData.email}</p>
         </div>
+        {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
+        {success && <div className="text-green-500 mb-4 text-center">{success}</div>}
         <button
           onClick={handleDelete}
           className="bg-red-600 text-white px-8 py-4 rounded-full hover:bg-red-700 transition duration-300 flex items-center justify-center w-full text-lg"
