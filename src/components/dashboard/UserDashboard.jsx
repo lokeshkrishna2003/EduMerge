@@ -3,17 +3,21 @@ import PlaylistCard from "./PlaylistCard"; // Ensure correct path
 
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 import { FiPlus } from "react-icons/fi"; // Importing plus icon
 
 import "aos/dist/aos.css";
 import AOS from "aos";
 import { Link } from "react-router-dom";
+import isAuthenticated from "../../auth";
 
 AOS.init();
 
 const UserDashboard = () => {
     const [userName, setUsername] = useState("");
     
+    const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
   const settingsRef = useRef();
 
@@ -50,6 +54,22 @@ const UserDashboard = () => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [settingsRef]);
+
+  useEffect(() => {
+    // Redirect to landing page if not authenticated
+    if (!isAuthenticated()) {
+      navigate('/');
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    // Clear user data from local storage or other session management
+    localStorage.removeItem('userId');
+
+    // Navigate to the landing page or login page
+    navigate('/');
+  };
+
 
   // Fetch user details from backend
   useEffect(() => {
@@ -118,7 +138,7 @@ const UserDashboard = () => {
               </ul>
             </div>
           )}
-          <button className="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+          <button onClick={handleLogout} className="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300">
             <IoLogOut size={20} className="mr-2" />
             Logout
           </button>
