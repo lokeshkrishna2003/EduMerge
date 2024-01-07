@@ -70,9 +70,11 @@ const CreatePlaylist = () => {
                 </button>
                 </div>
             </div>
+            <div className="absolute inset-y-5 left-1/2 w-0.5 bg-gray-500" aria-hidden="true"></div> {/* Vertical Partition Line */}
             <div className="w-1/2 ml-auto p-8 overflow-y-auto" data-aos="zoom-in">
                 <h2 className="text-2xl font-bold mb-4">Links</h2>
                 <div className="space-y-2">
+                {links===0?(<>
                     {links.map((link, index) => (
                         <div key={link.id} className="flex items-center justify-between p-2 bg-gray-700 rounded" data-aos='zoom-in'>
                             <span className="mr-2 text-lg">{index + 1}.</span>
@@ -85,6 +87,9 @@ const CreatePlaylist = () => {
                             </button>
                         </div>
                     ))}
+                </>):' paste the Links'}
+                
+                    
                 </div>
             </div>
         </div>
