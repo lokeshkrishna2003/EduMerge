@@ -21,6 +21,7 @@ const UserDashboard = () => {
     const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
   const settingsRef = useRef();
+  const [playlists, setPlaylists] = useState([]);
 
   // Greeting function
   const getGreeting = () => {
@@ -31,13 +32,13 @@ const UserDashboard = () => {
   };
 
   // Sample playlist data
-  const playlists = [
-    { id: 1, name: "Chill Vibes", videoCount: "10" },
-    { id: 2, name: "Workout Hits", videoCount: "7" },
-    { id: 3, name: "Study Tunes", videoCount: "15" },
-    { id: 4, name: "Party Mix", videoCount: "9" },
-    { id: 5, name: "Old Classics", videoCount: "4" },
-  ];
+  // const playlists = [
+  //   { id: 1, name: "Chill Vibes", videoCount: "10" },
+  //   { id: 2, name: "Workout Hits", videoCount: "7" },
+  //   { id: 3, name: "Study Tunes", videoCount: "15" },
+  //   { id: 4, name: "Party Mix", videoCount: "9" },
+  //   { id: 5, name: "Old Classics", videoCount: "4" },
+  // ];
 
   const handleCreatePlaylist = () => {
 //navigating to create playlist page
@@ -64,6 +65,29 @@ const UserDashboard = () => {
     }
   }, [navigate]);
 
+  //useeffect hook for fetching playlists from backend
+
+  useEffect(() => {
+   
+
+    const fetchPlaylists = async () => {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        try {
+          const response = await axios.get(`http://localhost:3001/user/playlists/${userId}`);
+          setPlaylists(response.data);
+          console.log(response.data);
+        } catch (error) {
+          console.error('Error fetching playlists', error);
+          // Handle error appropriately
+        }
+      }
+    };
+
+    fetchPlaylists();
+  }, []); // Add dependencies if necessary
+
+
   const handleLogout = () => {
     // Clear user data from local storage or other session management
     localStorage.removeItem('userId');
@@ -81,6 +105,7 @@ const UserDashboard = () => {
             try {
                 const response = await axios.get(`http://localhost:3001/user/${userId}`);
                 setUsername(response.data.username); // Assuming the username field is called 'username'
+
             } catch (error) {
                 console.error('Error fetching user data', error);
                 // Handle error appropriately
@@ -156,13 +181,21 @@ const UserDashboard = () => {
       <div className="mt-10 p-4">
         <h2 className="text-2xl mb-4">Your Playlists</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {playlists.map((playlist) => (
+          {playlists.length !== 0 ?(
+            <>
+            {playlists.map((playlist) => (
             <PlaylistCard
               key={playlist.id}
-              name={playlist.name}
-              videoCount={playlist.videoCount}
+              name={playlist.playlistName}
+              videoCount={playlist.links.length}
             />
           ))}
+            </>
+          ):(
+          <div className="flex justify-center items-center w-[100%] h-[5vh]  text-center" >
+          <div className=" text-gray-500" data-aos='zoom-in'>No playlists found</div>
+          </div>
+          )}
         </div>
 
         {/* Floating Action Button */}
