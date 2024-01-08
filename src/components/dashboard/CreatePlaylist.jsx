@@ -22,6 +22,7 @@ const CreatePlaylist = () => {
 
     const deleteLink = (id) => {
         setLinks(links.filter(link => link.id !== id));
+    
     };
 
     return (
@@ -72,25 +73,28 @@ const CreatePlaylist = () => {
             </div>
             <div className="absolute inset-y-5 left-1/2 w-0.5 bg-gray-500" aria-hidden="true"></div> {/* Vertical Partition Line */}
             <div className="w-1/2 ml-auto p-8 overflow-y-auto" data-aos="zoom-in">
-                <h2 className="text-2xl font-bold mb-4">Links</h2>
+                <h1 className='text-3xl h-6 text-center  text-gray-400 font-bold mb-11' data-aos="zoom-in">  {playlistName} </h1>
+
+                <h2 className="text-1xl font-bold mb-4">Links :</h2>
                 <div className="space-y-2">
-                {links===0?(<>
-                    {links.map((link, index) => (
-                        <div key={link.id} className="flex items-center justify-between p-2 bg-gray-700 rounded" data-aos='zoom-in'>
-                            <span className="mr-2 text-lg">{index + 1}.</span>
-                            <div>
-                                <span className="text-lg font-semibold">{link.name}</span> - 
-                                <span className="ml-2 text-sm text-gray-400">{link.url}</span>
-                            </div>
-                            <button onClick={() => deleteLink(link.id)} className="ml-2">
-                                <FiTrash2 className="text-red-500 hover:text-red-700" />
-                            </button>
-                        </div>
-                    ))}
-                </>):' paste the Links'}
-                
-                    
+    {links.length > 0 ? (
+        links.map((link, index) => (
+            <div key={link.id} className="flex items-center justify-between p-2 bg-gray-700 rounded" data-aos='zoom-in'>
+                <span className="mr-2 text-lg">{index + 1}.</span>
+                <div>
+                    <span className="text-lg font-semibold">{link.name}</span> - 
+                    <span className="ml-2 text-sm text-gray-400">{link.url}</span>
                 </div>
+                <button onClick={() => deleteLink(link.id)} className="ml-2">
+                    <FiTrash2 className="text-red-500 hover:text-red-700" />
+                </button>
+            </div>
+        ))
+    ) : (
+        <div className="text-center text-gray-400" data-aos='fade-in'>Add the Links</div>
+    )}
+</div>
+
             </div>
         </div>
     );
