@@ -126,7 +126,7 @@ const CreatePlaylist = () => {
         aria-hidden="true"
       ></div>
 <div className="w-full md:w-1/2 xl:w-1/2 2xl:w-1/2 ml-auto p-8 overflow-y-auto">
-  <h1 className="text-3xl text-center text-gray-400 font-bold mb-11" data-aos="zoom-in">
+  <h1 className="text-3xl h-6 text-center text-gray-400 font-bold mb-11" data-aos="zoom-in">
     {playlistName}
   </h1>
 
