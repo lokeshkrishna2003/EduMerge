@@ -10,6 +10,7 @@ import { CiBoxList,CiSquareCheck } from "react-icons/ci";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
+import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
@@ -42,9 +43,30 @@ const CreatePlaylist = () => {
     setLinks(items);
   };
 
-  const createPlaylist = () => {
-    console.log("Playlist Name:", playlistName);
-    console.log("Links:", links);
+  const createPlaylist =async () => {
+    // Get user ID from local storage or context/state management
+    const userId = localStorage.getItem('userId');
+
+    if (!userId) {
+      console.error("User ID is not available");
+      return;
+    }
+    try {
+      const response = await axios.post(`http://localhost:3001/user/create-playlist/${userId}`, {
+        userId: userId,
+        playlistName: playlistName,
+        links: links,
+      });
+
+      if (response.status === 201) {
+        console.log("Playlist created successfully");
+        // Handle success (e.g., navigate to the dashboard or display a success message)
+      }
+    } catch (error) {
+      console.error('Error creating playlist', error);
+      // Handle error appropriately
+    }
+    
   };
 
   return (
