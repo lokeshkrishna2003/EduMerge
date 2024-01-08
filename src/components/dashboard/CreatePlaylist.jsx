@@ -48,8 +48,8 @@ const CreatePlaylist = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
-      <div className="p-8 space-y-6 md:w-full lg:w-1/2" data-aos="fade-right">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-br from-gray-900 to-black text-white">
+      <div className="md:w-1/2 p-8 space-y-6" data-aos="fade-right">
         <h2 className="text-4xl font-bold flex justify-center items-center space-x-2">
           <CiBoxList
             size={30}
@@ -125,7 +125,7 @@ const CreatePlaylist = () => {
         className="hidden md:block absolute inset-y-0 left-1/2 w-0.5 bg-gray-500"
         aria-hidden="true"
       ></div>
-<div className="p-8 overflow-y-auto md:w-full lg:w-1/2 lg:ml-auto" data-aos="zoom-in">
+<div className="w-full md:w-1/2 xl:w-1/2 2xl:w-1/2 ml-auto p-8 overflow-y-auto">
   <h1 className="text-3xl text-center text-gray-400 font-bold mb-11" data-aos="zoom-in">
     {playlistName}
   </h1>
