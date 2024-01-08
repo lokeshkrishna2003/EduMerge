@@ -42,7 +42,7 @@ const CreatePlaylist = () => {
     setLinks(items);
   };
 
-  const savePlaylist = () => {
+  const createPlaylist = () => {
     console.log("Playlist Name:", playlistName);
     console.log("Links:", links);
   };
@@ -114,11 +114,11 @@ const CreatePlaylist = () => {
         </div>
 
         <button
-          onClick={savePlaylist}
+          onClick={createPlaylist}
           className="flex items-center justify-center w-full px-4 py-2 text-center bg-purple-500 rounded hover:bg-purple-700 transition duration-300"
         >
           <CiSquareCheck size={30} className="mr-2" />
-          Save Playlist
+          Create Playlist
         </button>
       </div>
       <div
