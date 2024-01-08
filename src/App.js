@@ -21,6 +21,7 @@ import UpdateProfile from "./components/dashboard/UpdateProfile";
 import ChangePassword from "./components/dashboard/ChangePassword";
 import DeleteAccount from "./components/dashboard/DeleteAccount";
 import CreatePlaylist from "./components/dashboard/CreatePlaylist";
+import EditPlaylist from "./components/dashboard/EditPlaylist";
 
 
 
@@ -54,6 +55,7 @@ const App = () => {
         <Route path="/user/change-password" element={<ChangePassword/>} />
         <Route path="/user/delete-account" element={<DeleteAccount/>} />
         <Route path="/user/create-playlist" element={<CreatePlaylist/>} />
+        <Route path="/user/edit-playlist" element={<EditPlaylist/>} />
 
       </Routes>
     </Router>
