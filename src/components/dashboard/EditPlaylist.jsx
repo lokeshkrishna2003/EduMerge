@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 import axios from 'axios';
 import {
   FiEdit2,
@@ -8,10 +9,12 @@ import {
   FiTrash2
 } from 'react-icons/fi';
 import { CiBoxList, CiSquareCheck } from 'react-icons/ci';
+import { v4 as uuidv4 } from "uuid";
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { MdOutlineDragIndicator } from 'react-icons/md';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useParams } from 'react-router-dom';
 
 AOS.init();
 
@@ -20,15 +23,19 @@ const EditPlaylist = ({ match }) => {
   const [linkName, setLinkName] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
   const [links, setLinks] = useState([]);
-  const playlistId = match.params.playlistId; // Get playlist ID from route parameters
+ const { playlistId } = useParams();; // Get playlist ID from route parameters
+
 
   useEffect(() => {
     const fetchPlaylistData = async () => {
+
+      
+
       try {
-        const response = await axios.get(`http://localhost:3001/api/playlists/details/${playlistId}`);
+        const response = await axios.get(`http://localhost:3001/user/playlist/${playlistId}`);
         const { playlistName, links } = response.data;
         setPlaylistName(playlistName);
-        setLinks(links);
+        setLinks(links.map(link => ({ id: uuidv4(), name: link.name, url: link.url })));
       } catch (error) {
         console.error('Error fetching playlist data', error);
       }
@@ -66,7 +73,7 @@ const EditPlaylist = ({ match }) => {
     }
 
     try {
-      await axios.put(`http://localhost:3001/api/edit-playlist/${playlistId}`, {
+      await axios.put(`http://localhost:3001/user/edit-playlist/${playlistId}`, {
         userId,
         playlistName,
         links

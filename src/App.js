@@ -49,13 +49,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/auth" element={<AuthForm />} />
-        {/* <Route path="/submit-video" element={<VideoSubmission />} /> */}
         <Route path="/user/dashboard" element={<UserDashboard />} />
         <Route path="/user/update-profile" element={<UpdateProfile />} />
         <Route path="/user/change-password" element={<ChangePassword/>} />
         <Route path="/user/delete-account" element={<DeleteAccount/>} />
         <Route path="/user/create-playlist" element={<CreatePlaylist/>} />
-        <Route path="/user/edit-playlist" element={<EditPlaylist/>} />
+        <Route path="/edit-playlist/:playlistId" element={<EditPlaylist/>} />
 
       </Routes>
     </Router>

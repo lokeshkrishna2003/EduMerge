@@ -13,6 +13,7 @@ import AOS from "aos";
 
 import isAuthenticated from "../../auth";
 
+
 AOS.init();
 
 const UserDashboard = () => {
@@ -39,6 +40,13 @@ const UserDashboard = () => {
   //   { id: 4, name: "Party Mix", videoCount: "9" },
   //   { id: 5, name: "Old Classics", videoCount: "4" },
   // ];
+
+  const handleEditPlaylist = (playlistId) => {
+    // Handle the edit action with the specific playlistId
+    console.log(`Edit playlist with id ${playlistId}`);
+    // You can navigate to the edit page or perform any other action
+    navigate(`/edit-playlist/${playlistId}`)
+  };
 
   const handleCreatePlaylist = () => {
 //navigating to create playlist page
@@ -184,11 +192,14 @@ const UserDashboard = () => {
           {playlists.length !== 0 ?(
             <>
             {playlists.map((playlist) => (
+            
             <PlaylistCard
-              key={playlist.id}
+              key={playlist._id}
               name={playlist.playlistName}
               videoCount={playlist.links.length}
+              onEdit={() => handleEditPlaylist(playlist._id)}
             />
+            
           ))}
             </>
           ):(

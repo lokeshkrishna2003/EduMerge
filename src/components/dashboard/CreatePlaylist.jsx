@@ -60,6 +60,9 @@ const CreatePlaylist = () => {
 
       if (response.status === 201) {
         console.log("Playlist created successfully");
+        console.log(response.data.newPlaylist._id)
+        localStorage.setItem('playlistId', response.data.newPlaylist._id)
+
         // Handle success (e.g., navigate to the dashboard or display a success message)
       }
     } catch (error) {
