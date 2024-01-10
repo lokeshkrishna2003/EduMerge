@@ -58,6 +58,10 @@ const UserDashboard = () => {
     
   };
 
+  const handleClickPlaylist =(playlistId)=>{
+    navigate(`/video-player/${playlistId}`);
+  }
+
   // Close settings dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -203,6 +207,7 @@ const UserDashboard = () => {
               videoCount={playlist.links.length}
               onEdit={() => handleEditPlaylist(playlist._id)}
               onDelete={() => handleDeletePlaylist(playlist._id)}
+              onClickPlaylist={()=> handleClickPlaylist(playlist._id)}
             />
             
           ))}

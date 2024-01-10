@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FiEdit, FiPlay ,FiTrash } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 
-const PlaylistCard = ({ name, videoCount, onEdit ,onDelete }) => {
+const PlaylistCard = ({ name, videoCount, onEdit ,onDelete ,onClickPlaylist }) => {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
@@ -13,6 +13,7 @@ const PlaylistCard = ({ name, videoCount, onEdit ,onDelete }) => {
     data-aos='zoom-in'
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
+      onClick={onClickPlaylist}
       className="relative rounded-lg overflow-hidden shadow-lg bg-gray-800 hover:bg-gray-700 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
     >
       <div className="absolute top-2 right-2 flex gap-2">
