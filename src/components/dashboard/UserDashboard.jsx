@@ -48,6 +48,10 @@ const UserDashboard = () => {
     navigate(`/edit-playlist/${playlistId}`)
   };
 
+  const handleDeletePlaylist = (playlistId) => {
+    navigate(`/delete-playlist/${playlistId}`)
+  };
+
   const handleCreatePlaylist = () => {
 //navigating to create playlist page
     navigate('/user/create-playlist');
