@@ -202,6 +202,7 @@ const UserDashboard = () => {
               name={playlist.playlistName}
               videoCount={playlist.links.length}
               onEdit={() => handleEditPlaylist(playlist._id)}
+              onDelete={() => handleDeletePlaylist(playlist._id)}
             />
             
           ))}
