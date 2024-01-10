@@ -23,6 +23,7 @@ import DeleteAccount from "./components/dashboard/DeleteAccount";
 import CreatePlaylist from "./components/dashboard/CreatePlaylist";
 import EditPlaylist from "./components/dashboard/EditPlaylist";
 import DeletePlaylist from "./components/dashboard/DeletePlaylist";
+import VideoPlayer from "./components/dashboard/VideoPlayer";
 
 
 
@@ -57,6 +58,8 @@ const App = () => {
         <Route path="/user/create-playlist" element={<CreatePlaylist/>} />
         <Route path="/edit-playlist/:playlistId" element={<EditPlaylist/>} />
         <Route path="/delete-playlist/:playlistId" element={<DeletePlaylist/>} />
+        <Route path="/video-player/:playlistId" element={<VideoPlayer/>} />
+
 
       </Routes>
     </Router>
