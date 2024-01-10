@@ -217,7 +217,7 @@ const UserDashboard = () => {
         {/* Floating Action Button */}
         <button
           onClick={handleCreatePlaylist}
-          className="fixed right-8 bottom-8 bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
+          className="fixed right-8 bottom-8 bg-purple-500 hover:bg-purple-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300"
         >
 
           <FiPlus size={35} />
