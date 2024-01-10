@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { FiEdit, FiPlay } from 'react-icons/fi';
+import { FiEdit, FiPlay ,FiTrash } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
 
-const PlaylistCard = ({ name, videoCount, onEdit }) => {
+const PlaylistCard = ({ name, videoCount, onEdit ,onDelete }) => {
   const [hover, setHover] = useState(false);
   const navigate = useNavigate();
 
@@ -10,25 +10,31 @@ const PlaylistCard = ({ name, videoCount, onEdit }) => {
 
   return (
     <div
-      data-aos="fade-up"
+    data-aos='zoom-in'
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       className="relative rounded-lg overflow-hidden shadow-lg bg-gray-800 hover:bg-gray-700 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
     >
-      <div className="absolute top-2 right-2">
+      <div className="absolute top-2 right-2 flex gap-2">
         <button
           onClick={onEdit}
           className="text-white rounded-full p-1 hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-110"
         >
           <FiEdit size={15} />
         </button>
+        <button
+              onClick={onDelete}
+              className="text-white rounded-full p-1 hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-110"
+            >
+              <FiTrash size={15} />
+            </button>
       </div>
 
       <div className="px-6 py-4">
         {hover ? (
           <div className="flex items-center">
             <FiPlay className="mr-2" />
-            <div className="font-bold text-xl">Play {name}</div>
+            <div className="font-bold text-xl" >Play {name}</div>
           </div>
         ) : (
           <div className="font-bold text-xl mb-2">{name}</div>
