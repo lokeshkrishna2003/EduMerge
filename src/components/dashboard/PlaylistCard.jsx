@@ -14,7 +14,7 @@ const PlaylistCard = ({ name, videoCount, onEdit ,onDelete ,onClickPlaylist }) =
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       onClick={onClickPlaylist}
-      className="relative rounded-lg overflow-hidden shadow-lg bg-gray-800 hover:bg-gray-700 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
+      className="relative rounded-lg overflow-hidden cursor-pointer shadow-lg bg-gray-800 hover:bg-gray-700 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105"
     >
       <div className="absolute top-2 right-2 flex gap-2">
         <button
@@ -33,9 +33,9 @@ const PlaylistCard = ({ name, videoCount, onEdit ,onDelete ,onClickPlaylist }) =
 
       <div className="px-6 py-4">
         {hover ? (
-          <div className="flex items-center">
-            <FiPlay className="mr-2" />
-            <div className="font-bold text-xl" >Play {name}</div>
+          <div className="flex justify-start items-center">
+            <FiPlay size={20} className="mr-2 mb-1" />
+            <div className="font-bold text-xl mb-2" >{name}</div>
           </div>
         ) : (
           <div className="font-bold text-xl mb-2">{name}</div>
