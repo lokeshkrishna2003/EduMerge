@@ -201,7 +201,7 @@ const VideoPlayer = () => {
 
               <div className="text-center my-4">
     <strong className="text-xl text-white">Now Playing:</strong>
-    <span className="text-xl text-gray-500 ml-2">fef{playlist?.links[currentVideoIndex]?.playlistName}</span>
+    <span className="text-xl text-gray-400 ml-2">{playlist?.links[currentVideoIndex]?.name}</span>
   </div>
               
               {/* Playback Controls */}
