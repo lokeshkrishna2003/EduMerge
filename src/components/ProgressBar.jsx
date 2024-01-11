@@ -1,5 +1,5 @@
 // ProgressBar.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const ProgressBar = ({ isLoading }) => {
   const [progress, setProgress] = useState(0);
@@ -26,10 +26,10 @@ const ProgressBar = ({ isLoading }) => {
   }, [isLoading]);
 
   return (
-    <div 
+    <div
       className="fixed top-1 left-0 z-50 h-[8px] bg-[#6D27D9] transition-all duration-300 ease-out"
-      style={{ width: `${progress}%` }}>
-    </div>
+      style={{ width: `${progress}%` }}
+    ></div>
   );
 };
 

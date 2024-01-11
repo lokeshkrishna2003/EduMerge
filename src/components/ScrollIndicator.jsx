@@ -1,13 +1,19 @@
 // ScrollIndicator.js
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const ScrollIndicator = () => {
   const location = useLocation();
   const [isVisible, setIsVisible] = useState(false);
 
   // Define non-scrollable routes
-  const nonScrollableRoutes = ['auth?mode=login', '/sauth?mode=signup' , '/user/update-profile','/user/change-password','/user/delete-account'];
+  const nonScrollableRoutes = [
+    "auth?mode=login",
+    "/sauth?mode=signup",
+    "/user/update-profile",
+    "/user/change-password",
+    "/user/delete-account",
+  ];
 
   useEffect(() => {
     const checkScrollable = () => {
@@ -31,12 +37,12 @@ const ScrollIndicator = () => {
 
     // Perform the scrollability check with a slight delay for dynamic content
     setTimeout(checkScrollable, 100);
-    window.addEventListener('scroll', onScroll);
-    window.addEventListener('resize', checkScrollable);
+    window.addEventListener("scroll", onScroll);
+    window.addEventListener("resize", checkScrollable);
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', checkScrollable);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", checkScrollable);
     };
   }, [location.pathname]); // React to route changes
 
