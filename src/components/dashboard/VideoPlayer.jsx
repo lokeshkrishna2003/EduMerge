@@ -190,7 +190,7 @@ const VideoPlayer = () => {
             </div>
 
             <div className="playlist-container bg-gray-700 p-4 rounded-lg">
-              <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName || 'Playlist'}</h3>
+              <h3 className="text-xl text-white font-semibold mb-5">{playlist.playlistName || 'Playlist'}</h3>
               <ul className="space-y-3">
                 {playlist?.links.map((link, index) => (
                   <li key={index} className={`p-2 rounded-md hover:bg-gray-600 transition duration-300 ${index === currentVideoIndex ? 'bg-gray-800' : ''}`}
