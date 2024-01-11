@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 import axios from 'axios';
 import {
   FiEdit2,
@@ -16,6 +17,7 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import isAuthenticated from '../../auth';
+import ProgressIndicator from '../loader/ProgressIndicator';
 
 
 
@@ -24,6 +26,7 @@ AOS.init();
 const EditPlaylist = ({ match }) => {
   const [playlistName, setPlaylistName] = useState('');
   const [linkName, setLinkName] = useState('');
+  const [loading, setLoading] = useState(false);
   const [linkUrl, setLinkUrl] = useState('');
   const [links, setLinks] = useState([]);
  const { playlistId } = useParams();; // Get playlist ID from route parameters
@@ -32,6 +35,7 @@ const EditPlaylist = ({ match }) => {
 
   useEffect(() => {
     const fetchPlaylistData = async () => {
+      setLoading(true);
 
       
 
@@ -42,7 +46,7 @@ const EditPlaylist = ({ match }) => {
         setLinks(links.map(link => ({ id: uuidv4(), name: link.name, url: link.url })));
       } catch (error) {
         console.error('Error fetching playlist data', error);
-      }
+      }finally{setLoading(false)}
     };
 
     fetchPlaylistData();
@@ -161,7 +165,9 @@ const EditPlaylist = ({ match }) => {
         </h1>
 
         <h2 className="text-xl font-bold mb-4">Links:</h2>
-        <DragDropContext onDragEnd={onDragEnd}>
+        {loading?<ProgressIndicator/>:(<>
+        
+          <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="droppable-links">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
@@ -199,6 +205,9 @@ const EditPlaylist = ({ match }) => {
             )}
           </Droppable>
         </DragDropContext>
+        
+        </>)}
+
       </div>
     </div>
   );
