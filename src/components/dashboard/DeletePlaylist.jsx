@@ -1,25 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { FaTrash } from 'react-icons/fa';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import isAuthenticated from '../../auth';
+import React, { useState, useEffect } from "react";
+import { FaTrash } from "react-icons/fa";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import isAuthenticated from "../../auth";
 
 const DeletePlaylist = () => {
-  const [playlistData, setPlaylistData] = useState({ name: '', videoCount: 0 });
-  const [error, setError] = useState('');
+  const [playlistData, setPlaylistData] = useState({ name: "", videoCount: 0 });
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const { playlistId } = useParams();
 
   useEffect(() => {
     const fetchPlaylistData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/user/playlist/${playlistId}`);
+        const response = await axios.get(
+          `http://localhost:3001/user/playlist/${playlistId}`
+        );
         setPlaylistData({
           name: response.data.playlistName,
           videoCount: response.data.links.length,
         });
       } catch (error) {
-        setError('Failed to fetch playlist data. ' + (error.response?.data || ''));
+        setError(
+          "Failed to fetch playlist data. " + (error.response?.data || "")
+        );
       }
     };
 
@@ -27,18 +31,20 @@ const DeletePlaylist = () => {
   }, [playlistId]);
 
   const handleDelete = async () => {
-    setError('');
+    setError("");
 
     try {
-      await axios.delete(`http://localhost:3001/user/delete-playlist/${playlistId}`);
+      await axios.delete(
+        `http://localhost:3001/user/delete-playlist/${playlistId}`
+      );
       // Redirect to the user dashboard or appropriate page
-      setTimeout(()=>{
-        if(isAuthenticated()){
-            navigate('/user/dashboard');
+      setTimeout(() => {
+        if (isAuthenticated()) {
+          navigate("/user/dashboard");
         }
-      },1500)
+      }, 1500);
     } catch (error) {
-      setError('Failed to delete playlist. ' + (error.response?.data || ''));
+      setError("Failed to delete playlist. " + (error.response?.data || ""));
     }
   };
 
@@ -46,8 +52,12 @@ const DeletePlaylist = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 to-black">
       <div className="bg-gray-800 p-12 rounded-xl shadow-2xl max-w-2xl mx-auto">
         <div className="mb-8 text-center">
-          <h2 className="text-3xl font-bold text-white mb-3">{playlistData.name}</h2>
-          <p className="text-lg text-gray-400">{playlistData.videoCount} videos</p>
+          <h2 className="text-3xl font-bold text-white mb-3">
+            {playlistData.name}
+          </h2>
+          <p className="text-lg text-gray-400">
+            {playlistData.videoCount} videos
+          </p>
         </div>
         {error && <div className="text-red-500 mb-4 text-center">{error}</div>}
         <button
