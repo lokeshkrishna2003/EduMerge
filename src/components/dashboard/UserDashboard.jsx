@@ -205,7 +205,10 @@ const UserDashboard = () => {
               key={playlist._id}
               name={playlist.playlistName}
               videoCount={playlist.links.length}
-              onEdit={() => handleEditPlaylist(playlist._id)}
+              onEdit={(e) =>{
+                e.stopPropagation(); // stops propagation of parent element opening
+                handleEditPlaylist(playlist._id)
+              } }
               onDelete={() => handleDeletePlaylist(playlist._id)}
               onClickPlaylist={()=> handleClickPlaylist(playlist._id)}
             />
