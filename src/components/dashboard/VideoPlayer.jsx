@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { FiSkipBack, FiSkipForward, FiUser, FiLink } from "react-icons/fi";
+import { FiSkipBack, FiSkipForward, FiUser, FiLink ,FiHome} from "react-icons/fi";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import isAuthenticated from "../../auth";
 
 AOS.init();
 
@@ -175,20 +176,53 @@ const VideoPlayer = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+const handleDashboardClick = () => {
+    
+       if(isAuthenticated()){
+        setTimeout(()=>{
+            navigate('/user/dashboard'); // routing to our dashboard
+        },1500)
+       } else {
+        setTimeout(()=>{
+            navigate('/auth?mode=login'); // routing to our landing page
+        },1500)
+       }
+   
+};
+
   return (
     <div className="flex flex-col bg-gradient-to-br from-gray-900 to-black min-h-screen">
       {/* Navbar at the top */}
-      <nav className="bg-gradient-to-br from-gray-900 to-black p-4 text-white fixed w-full z-10">
-        <div className="container mx-auto flex justify-between items-center">
-          <span className="text-xl font-semibold hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
-            EduMerge Studio
-          </span>
-          <div className="flex items-center hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
-            <FiUser className="mr-2 text-purple-400" />
-            <span>{userName}</span>
-          </div>
+      <nav className="bg-gradient-to-br from-gray-900 to-black p-4 text-white fixed w-full z-10 shadow-md">
+    <div className="container mx-auto flex justify-between items-center">
+      {/* Left side - Logo/Brand Name */}
+      <div className="flex items-center">
+        <span onClick={handleDashboardClick} className="text-xl font-semibold hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
+          EduMerge Studio
+        </span>
+      </div>
+
+      
+      
+
+        {/* User Info */}
+        <div className="flex items-center hover:text-purple-400  transition duration-300 ease-in-out">
+          <FiUser className="text-lg text-purple-400 mr-2 hover:rotate-12" />
+          <span className="hover:scale-110 transition duration-0">{userName}</span>
         </div>
-      </nav>
+
+        <div className="flex items-center">
+        {/* Dashboard Button */}
+        <button onClick={handleDashboardClick} className="flex items-center  bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 hover:scale-105 hover:rotate-1 transition duration-300 cursor-pointer">
+          <FiHome className="text-lg text-grey-400 mr-1" />
+          <span className="hover">Dashboard</span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
   
       {/* Main content */}
       <div className="flex-grow pt-16"> {/* pt-16 to push the content below the fixed navbar */}
