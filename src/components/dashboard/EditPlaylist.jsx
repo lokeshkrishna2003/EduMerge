@@ -15,6 +15,8 @@ import { MdOutlineDragIndicator } from 'react-icons/md';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useParams } from 'react-router-dom';
+import isAuthenticated from '../../auth';
+
 
 AOS.init();
 
@@ -80,6 +82,12 @@ const EditPlaylist = ({ match }) => {
       });
       console.log('Playlist updated successfully');
       // Handle success (e.g., navigate to the dashboard or display a success message)
+      setTimeout(()=>{
+        if(isAuthenticated()){
+          navigate('/user/dashboard')
+        }
+      },1500)
+      
     } catch (error) {
       console.error('Error updating playlist', error);
       // Handle error appropriately
