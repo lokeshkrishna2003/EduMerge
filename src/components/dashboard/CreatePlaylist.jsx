@@ -7,16 +7,15 @@ import {
   FiPlus,
   FiTrash2,
 } from "react-icons/fi";
-import { CiBoxList,CiSquareCheck } from "react-icons/ci";
+import { CiBoxList, CiSquareCheck } from "react-icons/ci";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MdOutlineDragIndicator } from "react-icons/md";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import {  useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import isAuthenticated from "../../auth";
-
 
 AOS.init();
 
@@ -48,42 +47,39 @@ const CreatePlaylist = () => {
     setLinks(items);
   };
 
-  const createPlaylist =async () => {
+  const createPlaylist = async () => {
     // Get user ID from local storage or context/state management
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
 
     if (!userId) {
       console.error("User ID is not available");
       return;
     }
     try {
-      const response = await axios.post(`http://localhost:3001/user/create-playlist/${userId}`, {
-        userId: userId,
-        playlistName: playlistName,
-        links: links,
-      });
+      const response = await axios.post(
+        `http://localhost:3001/user/create-playlist/${userId}`,
+        {
+          userId: userId,
+          playlistName: playlistName,
+          links: links,
+        }
+      );
 
       if (response.status === 201) {
         console.log("Playlist created successfully");
-        console.log(response.data.newPlaylist._id)
-
-
+        console.log(response.data.newPlaylist._id);
 
         // Handle success (e.g., navigate to the dashboard or display a success message)
-setTimeout(()=>{
-  if(isAuthenticated()){
-    navigate('/user/dashboard')
-  }
-},1500)
-
-      
-
+        setTimeout(() => {
+          if (isAuthenticated()) {
+            navigate("/user/dashboard");
+          }
+        }, 1500);
       }
     } catch (error) {
-      console.error('Error creating playlist', error);
+      console.error("Error creating playlist", error);
       // Handle error appropriately
     }
-    
   };
 
   return (
@@ -164,52 +160,70 @@ setTimeout(()=>{
         className="hidden md:block absolute inset-y-0 left-1/2 w-0.5 bg-gray-500"
         aria-hidden="true"
       ></div>
-<div className="w-full md:w-1/2 xl:w-1/2 2xl:w-1/2 ml-auto p-8 overflow-y-auto">
-  <h1 className="text-3xl h-6 text-center text-gray-400 font-bold mb-11" data-aos="zoom-in">
-    {playlistName}
-  </h1>
+      <div className="w-full md:w-1/2 xl:w-1/2 2xl:w-1/2 ml-auto p-8 overflow-y-auto">
+        <h1
+          className="text-3xl h-6 text-center text-gray-400 font-bold mb-11"
+          data-aos="zoom-in"
+        >
+          {playlistName}
+        </h1>
 
-  <h2 className="text-xl font-bold mb-4">Links:</h2>
-  <DragDropContext onDragEnd={onDragEnd}>
-    <Droppable droppableId="droppable-links">
-      {(provided) => (
-        <div {...provided.droppableProps} ref={provided.innerRef} className="space-y-2">
-          {links.length > 0 ? (
-            links.map((link, index) => (
-              <Draggable key={link.id} draggableId={`draggable-${link.id}`} index={index}>
-                {(provided) => (
-                  <div
-                    ref={provided.innerRef}
-                    {...provided.draggableProps}
-                    {...provided.dragHandleProps}
-                    className="flex items-center justify-between p-2 bg-gray-700 rounded"
-                    data-aos="zoom-in"
-                  >
-                    <span className="text-lg">{index + 1}.</span>
-                    <MdOutlineDragIndicator className="text-gray-400 mr-2" />
-                    <div className="flex-grow">
-                      <span className="text-lg font-semibold">{link.name}</span> -
-                      <span className="ml-2 text-sm text-gray-400">{link.url}</span>
-                    </div>
-                    <button onClick={() => deleteLink(link.id)} className="ml-2">
-                      <FiTrash2 className="text-red-500 hover:text-red-700" />
-                    </button>
+        <h2 className="text-xl font-bold mb-4">Links:</h2>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Droppable droppableId="droppable-links">
+            {(provided) => (
+              <div
+                {...provided.droppableProps}
+                ref={provided.innerRef}
+                className="space-y-2"
+              >
+                {links.length > 0 ? (
+                  links.map((link, index) => (
+                    <Draggable
+                      key={link.id}
+                      draggableId={`draggable-${link.id}`}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          className="flex items-center justify-between p-2 bg-gray-700 rounded"
+                          data-aos="zoom-in"
+                        >
+                          <span className="text-lg">{index + 1}.</span>
+                          <MdOutlineDragIndicator className="text-gray-400 mr-2" />
+                          <div className="flex-grow">
+                            <span className="text-lg font-semibold">
+                              {link.name}
+                            </span>{" "}
+                            -
+                            <span className="ml-2 text-sm text-gray-400">
+                              {link.url}
+                            </span>
+                          </div>
+                          <button
+                            onClick={() => deleteLink(link.id)}
+                            className="ml-2"
+                          >
+                            <FiTrash2 className="text-red-500 hover:text-red-700" />
+                          </button>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-400" data-aos="fade-in">
+                    Add the Links
                   </div>
                 )}
-              </Draggable>
-            ))
-          ) : (
-            <div className="text-center text-gray-400" data-aos="fade-in">
-              Add the Links
-            </div>
-          )}
-          {provided.placeholder}
-        </div>
-      )}
-    </Droppable>
-  </DragDropContext>
-</div>
-
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
+      </div>
     </div>
   );
 };
