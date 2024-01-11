@@ -31,6 +31,7 @@ const VideoPlayer = () => {
           response.data.links.every((link) => link.url)
         ) {
           setPlaylist(response.data);
+          console.log(response.data);
         } else {
           console.error("Invalid playlist data:", response.data);
         }
@@ -245,7 +246,8 @@ const VideoPlayer = () => {
             
             {/* Playlist */}
             <div className="lg:max-w-md bg-gray-800 p-4 rounded-lg overflow-y-auto">
-              <h3 className="text-xl text-white font-semibold mb-5">{playlist?.name || 'Playlist'}</h3>
+              <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName
+ || 'Playlist'}</h3>
               <ul className="space-y-3">
                 {playlist?.links.map((link, index) => (
                   <li key={index} 
