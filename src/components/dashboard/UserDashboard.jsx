@@ -1,8 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import PlaylistCard from "./PlaylistCard"; // Ensure correct path
 
-
-
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -15,14 +13,13 @@ import AOS from "aos";
 import isAuthenticated from "../../auth";
 import ProgressIndicator from "../loader/ProgressIndicator";
 
-
 AOS.init();
 
 const UserDashboard = () => {
-    const [userName, setUsername] = useState("");
-    const [loading,setLoading] = useState(false)
-    
-    const navigate = useNavigate();
+  const [userName, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
   const settingsRef = useRef();
   const [playlists, setPlaylists] = useState([]);
@@ -48,22 +45,21 @@ const UserDashboard = () => {
     // Handle the edit action with the specific playlistId
     console.log(`Edit playlist with id ${playlistId}`);
     // You can navigate to the edit page or perform any other action
-    navigate(`/edit-playlist/${playlistId}`)
+    navigate(`/edit-playlist/${playlistId}`);
   };
 
   const handleDeletePlaylist = (playlistId) => {
-    navigate(`/delete-playlist/${playlistId}`)
+    navigate(`/delete-playlist/${playlistId}`);
   };
 
   const handleCreatePlaylist = () => {
-//navigating to create playlist page
-    navigate('/user/create-playlist');
-    
+    //navigating to create playlist page
+    navigate("/user/create-playlist");
   };
 
-  const handleClickPlaylist =(playlistId)=>{
+  const handleClickPlaylist = (playlistId) => {
     navigate(`/video-player/${playlistId}`);
-  }
+  };
 
   // Close settings dropdown when clicking outside
   useEffect(() => {
@@ -80,25 +76,25 @@ const UserDashboard = () => {
   useEffect(() => {
     // Redirect to landing page if not authenticated
     if (!isAuthenticated()) {
-      navigate('/');
+      navigate("/");
     }
   }, [navigate]);
 
   //useeffect hook for fetching playlists from backend
 
   useEffect(() => {
-   
-
     const fetchPlaylists = async () => {
-      const userId = localStorage.getItem('userId');
+      const userId = localStorage.getItem("userId");
       setLoading(true);
       if (userId) {
         try {
-          const response = await axios.get(`http://localhost:3001/user/playlists/${userId}`);
+          const response = await axios.get(
+            `http://localhost:3001/user/playlists/${userId}`
+          );
           setPlaylists(response.data);
           console.log(response.data);
         } catch (error) {
-          console.error('Error fetching playlists', error);
+          console.error("Error fetching playlists", error);
           // Handle error appropriately
         } finally {
           setLoading(false);
@@ -109,34 +105,33 @@ const UserDashboard = () => {
     fetchPlaylists();
   }, []); // Add dependencies if necessary
 
-
   const handleLogout = () => {
     // Clear user data from local storage or other session management
-    localStorage.removeItem('userId');
+    localStorage.removeItem("userId");
 
     // Navigate to the landing page or login page
-    navigate('/');
+    navigate("/");
   };
-
 
   // Fetch user details from backend
   useEffect(() => {
     const fetchUserData = async () => {
-        const userId = localStorage.getItem('userId');
-        if (userId) {
-            try {
-                const response = await axios.get(`http://localhost:3001/user/${userId}`);
-                setUsername(response.data.username); // Assuming the username field is called 'username'
-
-            } catch (error) {
-                console.error('Error fetching user data', error);
-                // Handle error appropriately
-            }
+      const userId = localStorage.getItem("userId");
+      if (userId) {
+        try {
+          const response = await axios.get(
+            `http://localhost:3001/user/${userId}`
+          );
+          setUsername(response.data.username); // Assuming the username field is called 'username'
+        } catch (error) {
+          console.error("Error fetching user data", error);
+          // Handle error appropriately
         }
+      }
     };
 
     fetchUserData();
-}, []);
+  }, []);
 
   return (
     <div className="bg-gradient-to-br from-gray-900 to-black min-h-screen text-white">
@@ -156,38 +151,31 @@ const UserDashboard = () => {
             onClick={() => setShowSettings(!showSettings)}
             className="flex items-center hover:text-white text-gray-500  transition duration-300"
           >
-            <IoSettingsSharp size={30} className="mr-2 hover:-rotate-45 hover:scale-110 text-purple-500" />
-            
+            <IoSettingsSharp
+              size={30}
+              className="mr-2 hover:-rotate-45 hover:scale-110 text-purple-500"
+            />
           </button>
           {showSettings && (
             <div className="absolute right-[6rem] mt-12 py-5 w-48 border-1 bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-xl transition-all ease-in-out duration-300">
               <ul>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                    <Link to='/user/change-password' >
-
-                  Change Password
-                    </Link>
+                  <Link to="/user/change-password">Change Password</Link>
                 </li>
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                    <Link to='/user/update-profile' >
-
-                  Update Profile
-                    </Link>
+                  <Link to="/user/update-profile">Update Profile</Link>
                 </li>
-                
-            
+
                 <li className="block px-4 py-2 text-sm rounded-lg text-gray-300 hover:bg-gray-500">
-                    <Link to='/user/delete-account' >
-
-                  Delete Account
-                    </Link>
-                
-
+                  <Link to="/user/delete-account">Delete Account</Link>
                 </li>
               </ul>
             </div>
           )}
-          <button onClick={handleLogout} className="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300">
+          <button
+            onClick={handleLogout}
+            className="flex items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300"
+          >
             <IoLogOut size={20} className="mr-2" />
             Logout
           </button>
@@ -203,47 +191,46 @@ const UserDashboard = () => {
       <div className="mt-10 p-4">
         <h2 className="text-2xl mb-4">Your Playlists</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-{loading?<ProgressIndicator/>:(<>
-  {playlists.length !== 0  ?(
+          {loading ? (
+            <ProgressIndicator />
+          ) : (
             <>
-            {playlists.map((playlist) => (
-            
-            <PlaylistCard
-              key={playlist._id}
-              name={playlist.playlistName}
-              videoCount={playlist.links.length}
-              onEdit={(e) =>{
-                e.stopPropagation(); // stops propagation of parent element opening
-                handleEditPlaylist(playlist._id)
-              } }
-              onDelete={(e) =>{
-                e.stopPropagation(); // stops propagation of parent element opening
-                handleDeletePlaylist(playlist._id)
-              } }
-              onClickPlaylist={()=> handleClickPlaylist(playlist._id)}
-            />
-            
-          ))}
+              {playlists.length !== 0 ? (
+                <>
+                  {playlists.map((playlist) => (
+                    <PlaylistCard
+                      key={playlist._id}
+                      name={playlist.playlistName}
+                      videoCount={playlist.links.length}
+                      onEdit={(e) => {
+                        e.stopPropagation(); // stops propagation of parent element opening
+                        handleEditPlaylist(playlist._id);
+                      }}
+                      onDelete={(e) => {
+                        e.stopPropagation(); // stops propagation of parent element opening
+                        handleDeletePlaylist(playlist._id);
+                      }}
+                      onClickPlaylist={() => handleClickPlaylist(playlist._id)}
+                    />
+                  ))}
+                </>
+              ) : (
+                <div className="flex justify-center items-center w-[100%] h-[5vh]  text-center">
+                  <div className=" text-gray-500" data-aos="zoom-in">
+                    No playlists found
+                  </div>
+                </div>
+              )}
             </>
-          ):(
-          <div className="flex justify-center items-center w-[100%] h-[5vh]  text-center" >
-          <div className=" text-gray-500" data-aos='zoom-in'>No playlists found</div>
-          </div>
           )}
-</>)}
-
-          
         </div>
 
         {/* Floating Action Button */}
         <button
           onClick={handleCreatePlaylist}
           className="fixed right-8 bottom-8 bg-purple-500 hover:bg-purple-700 text-white p-4 rounded-full shadow-lg flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-300 "
-        
         >
-
           <FiPlus size={35} className="animate-bounce" />
-
         </button>
       </div>
     </div>
