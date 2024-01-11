@@ -78,12 +78,13 @@ const VideoPlayer = () => {
         // Everything is defined, so create the YouTube player.
   if (window.YT) {
     player = new window.YT.Player('player-container', {
-      height: '360',
+      height: '500',
       width: '100%',
       videoId: videoId,
       playerVars: {
         autoplay: 1,
         controls: 1,
+        playsinline: 1,
         modestbranding: 1,
         rel: 0,
         showinfo: 0,
@@ -148,62 +149,64 @@ const VideoPlayer = () => {
 
 
     return (
-        <div className="bg-gradient-to-br from-gray-900 to-black min-h-screen text-white p-4">
-        <div className="text-center">
-            <FiUser className="inline mr-2" />
-            <span>{userName}</span>
-        </div>
+        <div className="flex bg-gradient-to-br from-gray-900 to-black flex-col h-screen">
+        <nav className="bg-gradient-to-br from-gray-700 to-black p-4 text-white">
+          <div className="container mx-auto flex justify-between items-center">
+            <span className="text-lg font-semibold">EduMerge Studio</span>
+            <div className="flex items-center">
+              <FiUser className="mr-2" />
+              <span>{userName}</span>
+            </div>
+          </div>
+        </nav>
 
-        <div className="video-player-container mx-auto max-w-4xl">
-            <div id="player-container" ref={playerRef} className="w-full my-4 rounded-lg shadow-lg">
-                {/* YouTube Player will be injected here by the YouTube Iframe API */}
+        <div className="flex-grow overflow-auto">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div id="player-container" ref={playerRef} className="aspect-video w-full rounded-lg shadow-lg mb-4">
+              {/* YouTube Player will be injected here by the YouTube Iframe API */}
             </div>
 
-            <div className="flex justify-center gap-4 my-4">
-                <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
-                    className="p-2 text-violet-500 hover:text-violet-700 transition duration-300">
-                    <FiSkipBack size={24} />
-                </button>
-                <button onClick={() => changeVideo(currentVideoIndex + 1 >= playlist.links.length ? 0 : currentVideoIndex + 1)}
-                    className="p-2 text-violet-500 hover:text-violet-700 transition duration-300">
-                    <FiSkipForward size={24} />
-                </button>
+            <div className="flex justify-between items-center mb-4">
+              <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
+                      className="text-white bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition">
+                <FiSkipBack size={24} />
+              </button>
+              <div>
+                <strong className="text-xl">Now Playing:</strong>
+                <span className="text-xl ml-2">{playlist?.links[currentVideoIndex]?.name}</span>
+              </div>
+              <button onClick={() => changeVideo(currentVideoIndex + 1 >= playlist.links.length ? 0 : currentVideoIndex + 1)}
+                      className="text-white bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition">
+                <FiSkipForward size={24} />
+              </button>
             </div>
 
-            <div className="text-center mb-4">
-                <strong>Now Playing:</strong> {playlist?.links[currentVideoIndex]?.name}
-            </div>
-
-            <div className="flex justify-center items-center mb-6">
-                <input
-                    type="range"
-                    min="0.25"
-                    max="2"
-                    step="0.25"
-                    value={playbackRate}
-                    onChange={(e) => changePlaybackRate(parseFloat(e.target.value))}
-                    className="range range-primary w-1/2"
-                />
-                <span className="ml-2">{playbackRate.toFixed(2)}x Speed</span>
+            <div className="mb-6">
+              <label htmlFor="speed-control" className="text-white font-medium mr-2">Speed:</label>
+              <input id="speed-control" type="range" min="0.25" max="2" step="0.25" value={playbackRate}
+                     onChange={(e) => changePlaybackRate(parseFloat(e.target.value))}
+                     className="range range-primary" />
+              <span className="ml-2 text-white">{playbackRate.toFixed(2)}x</span>
             </div>
 
             <div className="playlist-container bg-gray-700 p-4 rounded-lg">
-                <h3 className="text-xl text-center font-semibold mb-5">Playlist</h3>
-                <ul className="space-y-3">
-                    {playlist?.links.map((link, index) => (
-                        <li key={index}  className={`p-2 rounded-md hover:bg-gray-600 transition duration-300 ${index === currentVideoIndex ? 'bg-gray-800' : ''}`}
-                            onClick={() => changeVideo(index)}>
-                            <span className="font-semibold">{link.name}</span>
-                            <span className="text-gray-400 text-sm ml-2">
-                                <FiLink className="inline mr-1" />
-                                {link.url}
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+              <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName || 'Playlist'}</h3>
+              <ul className="space-y-3">
+                {playlist?.links.map((link, index) => (
+                  <li key={index} className={`p-2 rounded-md hover:bg-gray-600 transition duration-300 ${index === currentVideoIndex ? 'bg-gray-800' : ''}`}
+                      onClick={() => changeVideo(index)}>
+                    <span className="font-semibold text-white">{link.name}</span>
+                    <span className="text-gray-400 text-sm ml-2">
+                      <FiLink className="inline mr-1" />
+                      {link.url}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
     )
 
                     }
