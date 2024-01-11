@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { FiSkipBack, FiSkipForward, FiUser, FiLink ,FiHome} from "react-icons/fi";
+import {
+  FiSkipBack,
+  FiSkipForward,
+  FiUser,
+  FiLink,
+  FiHome,
+} from "react-icons/fi";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import isAuthenticated from "../../auth";
 import ProgressIndicator from "../loader/ProgressIndicator";
-
 
 AOS.init();
 
@@ -18,13 +23,13 @@ const VideoPlayer = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [userName, setUserName] = useState("");
   const [playbackRate, setPlaybackRate] = useState(1);
-  const [loading,setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const playerRef = React.createRef();
 
   // Fetch playlist and user data on component mount
   useEffect(() => {
     const fetchPlaylist = async () => {
-        setLoading(true)
+      setLoading(true);
       try {
         const response = await axios.get(
           `http://localhost:3001/user/playlist/${playlistId}`
@@ -42,7 +47,9 @@ const VideoPlayer = () => {
         }
       } catch (error) {
         console.error("Error fetching playlist", error);
-      }finally{setLoading(false)}
+      } finally {
+        setLoading(false);
+      }
     };
 
     const fetchUserData = async () => {
@@ -167,7 +174,6 @@ const VideoPlayer = () => {
       window.player.setPlaybackRate(rate);
     }
   };
-  
 
   // Function to handle video end and play the next video
   const onPlayerStateChange = (event) => {
@@ -182,76 +188,102 @@ const VideoPlayer = () => {
 
   const navigate = useNavigate();
 
-const handleDashboardClick = () => {
-    
-       if(isAuthenticated()){
-        setTimeout(()=>{
-            navigate('/user/dashboard'); // routing to our dashboard
-        },1500)
-       } else {
-        setTimeout(()=>{
-            navigate('/auth?mode=login'); // routing to our landing page
-        },1500)
-       }
-   
-};
+  const handleDashboardClick = () => {
+    if (isAuthenticated()) {
+      setTimeout(() => {
+        navigate("/user/dashboard"); // routing to our dashboard
+      }, 1500);
+    } else {
+      setTimeout(() => {
+        navigate("/auth?mode=login"); // routing to our landing page
+      }, 1500);
+    }
+  };
 
   return (
     <div className="flex flex-col bg-gradient-to-br from-gray-900 to-black min-h-screen">
       {/* Navbar at the top */}
       <nav className="bg-gradient-to-br from-gray-900 to-black p-4 text-white fixed w-full z-10 shadow-md">
-    <div className="container mx-auto flex justify-between items-center">
-      {/* Left side - Logo/Brand Name */}
-      <div className="flex items-center">
-        <span onClick={handleDashboardClick} className="text-xl font-semibold hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
-          EduMerge Studio
-        </span>
-      </div>
+        <div className="container mx-auto flex justify-between items-center">
+          {/* Left side - Logo/Brand Name */}
+          <div className="flex items-center">
+            <span
+              onClick={handleDashboardClick}
+              className="text-xl font-semibold hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer"
+            >
+              EduMerge Studio
+            </span>
+          </div>
 
-      
-      
+          {/* User Info */}
+          <div className="flex items-center hover:text-purple-400  transition duration-300 ease-in-out">
+            <FiUser className="text-lg text-purple-400 mr-2 hover:rotate-12" />
+            <span className="hover:scale-110 transition duration-0">
+              {userName}
+            </span>
+          </div>
 
-        {/* User Info */}
-        <div className="flex items-center hover:text-purple-400  transition duration-300 ease-in-out">
-          <FiUser className="text-lg text-purple-400 mr-2 hover:rotate-12" />
-          <span className="hover:scale-110 transition duration-0">{userName}</span>
+          <div className="flex items-center">
+            {/* Dashboard Button */}
+            <button
+              onClick={handleDashboardClick}
+              className="flex items-center  bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 hover:scale-105 hover:rotate-1 transition duration-300 cursor-pointer"
+            >
+              <FiHome className="text-lg text-grey-400 mr-1" />
+              <span className="hover">Dashboard</span>
+            </button>
+          </div>
         </div>
+      </nav>
 
-        <div className="flex items-center">
-        {/* Dashboard Button */}
-        <button onClick={handleDashboardClick} className="flex items-center  bg-purple-600 text-white px-4 py-2 rounded-md hover:bg-purple-700 hover:scale-105 hover:rotate-1 transition duration-300 cursor-pointer">
-          <FiHome className="text-lg text-grey-400 mr-1" />
-          <span className="hover">Dashboard</span>
-        </button>
-
-      </div>
-    </div>
-  </nav>
-  
       {/* Main content */}
-      <div className="flex-grow pt-16"> {/* pt-16 to push the content below the fixed navbar */}
+      <div className="flex-grow pt-16">
+        {" "}
+        {/* pt-16 to push the content below the fixed navbar */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex flex-col lg:flex-row lg:space-x-4">
             {/* Video Player and Controls Container */}
             <div className="lg:flex-grow mb-4 lg:mb-0">
               {/* Video Player */}
-              <div id="player-container" ref={playerRef} className="aspect-video w-full rounded-lg shadow-lg">
+              <div
+                id="player-container"
+                ref={playerRef}
+                className="aspect-video w-full rounded-lg shadow-lg"
+              >
                 {/* YouTube Player will be injected here by the YouTube Iframe API */}
               </div>
 
               <div className="text-center my-4">
-    <strong className="text-xl text-white">Now Playing:</strong>
-    <span className="text-xl text-gray-400 ml-2">{playlist?.links[currentVideoIndex]?.name}</span>
-  </div>
-              
+                <strong className="text-xl text-white">Now Playing:</strong>
+                <span className="text-xl text-gray-400 ml-2">
+                  {playlist?.links[currentVideoIndex]?.name}
+                </span>
+              </div>
+
               {/* Playback Controls */}
               <div className="flex justify-center lg:justify-start gap-5 mt-4">
-                <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
-                        className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
+                <button
+                  onClick={() =>
+                    changeVideo(
+                      currentVideoIndex - 1 < 0
+                        ? playlist.links.length - 1
+                        : currentVideoIndex - 1
+                    )
+                  }
+                  className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out"
+                >
                   <FiSkipBack size={24} className="text-white" />
                 </button>
-                <button onClick={() => changeVideo(currentVideoIndex + 1 >= playlist.links.length ? 0 : currentVideoIndex + 1)}
-                        className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
+                <button
+                  onClick={() =>
+                    changeVideo(
+                      currentVideoIndex + 1 >= playlist.links.length
+                        ? 0
+                        : currentVideoIndex + 1
+                    )
+                  }
+                  className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out"
+                >
                   <FiSkipForward size={24} className="text-white" />
                 </button>
               </div>
@@ -279,40 +311,46 @@ const handleDashboardClick = () => {
                   {playbackRate.toFixed(2)}x
                 </span>
               </div>
-
             </div>
 
-            
-            
             {/* Playlist */}
-            
-              {loading?<ProgressIndicator/>:(<>
+
+            {loading ? (
+              <ProgressIndicator />
+            ) : (
+              <>
                 <div className="lg:max-w-md bg-gray-800 p-4 rounded-lg overflow-y-auto">
-                <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName
- || 'Playlist'}</h3>
-              <ul className="space-y-3">
-                {playlist?.links.map((link, index) => (
-                  <li key={index} 
-                      className={`p-2 rounded-m bg-gray-700 hover:bg-gray-600 rounded-md cursor-pointer transition duration-300 ease-in-out ${index === currentVideoIndex ? 'bg-gray-900' : ''}`}
-                      onClick={() => changeVideo(index)}>
-                    <span className="font-semibold text-white">{link.name} - </span>
-                    <span className="text-gray-400 text-sm ml-2">
-                      <FiLink className="inline mr-1 text-purple-500" />
-                      {link.url}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              </div>
-              
-              </>)}
-            
+                  <h3 className="text-xl text-white font-semibold mb-5">
+                    {playlist?.playlistName || "Playlist"}
+                  </h3>
+                  <ul className="space-y-3">
+                    {playlist?.links.map((link, index) => (
+                      <li
+                        key={index}
+                        className={`p-2 rounded-m bg-gray-700 hover:bg-gray-600 rounded-md cursor-pointer transition duration-300 ease-in-out ${
+                          index === currentVideoIndex ? "bg-gray-900" : ""
+                        }`}
+                        onClick={() => changeVideo(index)}
+                        data-aos="zoom-in"
+                      >
+                        <span className="font-semibold text-white">
+                          {link.name} -{" "}
+                        </span>
+                        <span className="text-gray-400 text-sm ml-2">
+                          <FiLink className="inline mr-1 text-purple-500" />
+                          {link.url}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
-  
 };
 
 export default VideoPlayer;
