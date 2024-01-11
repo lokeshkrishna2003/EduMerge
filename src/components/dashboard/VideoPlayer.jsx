@@ -257,7 +257,7 @@ const VideoPlayer = () => {
                       onClick={() => changeVideo(index)}>
                     <span className="font-semibold text-white">{link.name} - </span>
                     <span className="text-gray-400 text-sm ml-2">
-                      <FiLink className="inline mr-1" />
+                      <FiLink className="inline mr-1 text-purple-500" />
                       {link.url}
                     </span>
                   </li>
