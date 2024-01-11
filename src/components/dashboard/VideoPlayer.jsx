@@ -136,7 +136,7 @@ const VideoPlayer = () => {
         window.player.destroy();
       }
     };
-  }, [playlist, currentVideoIndex, playbackRate]);
+  }, [playlist, currentVideoIndex]);
 
   const getYoutubeVideoId = (url) => {
     if (!url) return null; // Return null if the URL is undefined or invalid
@@ -156,11 +156,13 @@ const VideoPlayer = () => {
   };
 
   const changePlaybackRate = (rate) => {
+    console.log(`Changing playback rate to: ${rate}`); // Add this line
     setPlaybackRate(rate);
     if (window.player && window.player.setPlaybackRate) {
       window.player.setPlaybackRate(rate);
     }
   };
+  
 
   // Function to handle video end and play the next video
   const onPlayerStateChange = (event) => {
