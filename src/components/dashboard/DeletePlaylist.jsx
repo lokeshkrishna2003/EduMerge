@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import isAuthenticated from '../../auth';
 
 const DeletePlaylist = () => {
   const [playlistData, setPlaylistData] = useState({ name: '', videoCount: 0 });
@@ -31,7 +32,11 @@ const DeletePlaylist = () => {
     try {
       await axios.delete(`http://localhost:3001/user/delete-playlist/${playlistId}`);
       // Redirect to the user dashboard or appropriate page
-      navigate('/user/dashboard');
+      setTimeout(()=>{
+        if(isAuthenticated()){
+            navigate('/user/dashboard');
+        }
+      },1500)
     } catch (error) {
       setError('Failed to delete playlist. ' + (error.response?.data || ''));
     }
