@@ -14,8 +14,9 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { MdOutlineDragIndicator } from 'react-icons/md';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import isAuthenticated from '../../auth';
+
 
 
 AOS.init();
@@ -26,6 +27,7 @@ const EditPlaylist = ({ match }) => {
   const [linkUrl, setLinkUrl] = useState('');
   const [links, setLinks] = useState([]);
  const { playlistId } = useParams();; // Get playlist ID from route parameters
+ const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -87,7 +89,7 @@ const EditPlaylist = ({ match }) => {
           navigate('/user/dashboard')
         }
       },1500)
-      
+
     } catch (error) {
       console.error('Error updating playlist', error);
       // Handle error appropriately
