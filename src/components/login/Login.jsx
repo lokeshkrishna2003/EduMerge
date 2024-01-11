@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ProgressIndicator from "../loader/ProgressIndicator";
+import isAuthenticated from "../../auth";
+
 
 
 
@@ -21,6 +23,13 @@ const Login = () => {
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
   };
+
+  useEffect(()=>{
+    if (isAuthenticated()) {
+      navigate("/user/dashboard");
+     } // Redirect to dashboard if already authenticated
+  },[navigate])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +55,8 @@ const Login = () => {
     
     }
   };
+
+
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-cover bg-center" data-aos='zoom-out'>
