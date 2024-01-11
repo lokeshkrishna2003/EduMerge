@@ -43,7 +43,12 @@ const DeleteAccount = () => {
       // Clear local storage and redirect as needed
       localStorage.removeItem('userId');
       // Redirect to the login page or landing page
-      navigate('/');
+      setTimeout(()=>{
+        if(isAuthenticated()){
+          navigate('/');
+        }
+      },1500)
+      
     } catch (error) {
       setError('Failed to delete account. ' + (error.response?.data || ''));
     }
