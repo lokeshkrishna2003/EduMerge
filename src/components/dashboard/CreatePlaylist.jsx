@@ -15,6 +15,8 @@ import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import {  useNavigate } from "react-router-dom";
+import isAuthenticated from "../../auth";
+
 
 AOS.init();
 
@@ -68,7 +70,12 @@ const CreatePlaylist = () => {
 
 
         // Handle success (e.g., navigate to the dashboard or display a success message)
-        navigate('/dashboard');
+setTimeout(()=>{
+  if(isAuthenticated()){
+    navigate('/user/dashboard')
+  }
+},1500)
+
       
 
       }
