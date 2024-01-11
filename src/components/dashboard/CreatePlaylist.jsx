@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import {
   FiEdit2,
   FiLink,
@@ -13,6 +14,7 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import {  useNavigate } from "react-router-dom";
 
 AOS.init();
 
@@ -21,6 +23,7 @@ const CreatePlaylist = () => {
   const [linkName, setLinkName] = useState("");
   const [linkUrl, setLinkUrl] = useState("");
   const [links, setLinks] = useState([]);
+  const navigate = useNavigate();
 
   const addLink = () => {
     if (linkName && linkUrl) {
@@ -63,7 +66,11 @@ const CreatePlaylist = () => {
         console.log(response.data.newPlaylist._id)
         localStorage.setItem('playlistId', response.data.newPlaylist._id)
 
+
         // Handle success (e.g., navigate to the dashboard or display a success message)
+        navigate('/dashboard');
+      
+
       }
     } catch (error) {
       console.error('Error creating playlist', error);
