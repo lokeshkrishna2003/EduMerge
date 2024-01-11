@@ -197,9 +197,14 @@ const VideoPlayer = () => {
               <div id="player-container" ref={playerRef} className="aspect-video w-full rounded-lg shadow-lg">
                 {/* YouTube Player will be injected here by the YouTube Iframe API */}
               </div>
+
+              <div className="text-center my-4">
+    <strong className="text-xl text-white">Now Playing:</strong>
+    <span className="text-xl text-gray-500 ml-2">fef{playlist?.links[currentVideoIndex]?.playlistName}</span>
+  </div>
               
               {/* Playback Controls */}
-              <div className="flex justify-center lg:justify-start gap-2 mt-4">
+              <div className="flex justify-center lg:justify-start gap-5 mt-4">
                 <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
                         className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
                   <FiSkipBack size={24} className="text-white" />
@@ -210,7 +215,7 @@ const VideoPlayer = () => {
                 </button>
               </div>
 
-              <div className="mb-4">
+              <div className="mb-4 flex justify-center mt-3">
                 <label
                   htmlFor="speed-control"
                   className="text-white font-medium mr-2"
@@ -222,7 +227,7 @@ const VideoPlayer = () => {
                   type="range"
                   min="0.25"
                   max="2"
-                  step="0.25"
+                  step="0.01"
                   value={playbackRate}
                   onChange={(e) =>
                     changePlaybackRate(parseFloat(e.target.value))
