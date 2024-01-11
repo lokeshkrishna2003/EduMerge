@@ -34,12 +34,7 @@ navigate('/')
   
     const handleChange = (e) => {
       setUserData({ ...userData, [e.target.name]: e.target.value });
-      //navigating user to dashboard after succesful updation of profile
-      setTimeout(()=>{
-        if(isAuthenticated()){
-          navigate('/user/dashboard')
-        }
-      },1500)
+      
 
     };
   
@@ -55,6 +50,12 @@ navigate('/')
       try {
         const response = await axios.put(`http://localhost:3001/user/update-profile/${userId}`, userData);
         setSuccess('Profile updated successfully');
+        //navigating user to dashboard after succesful updation of profile
+        setTimeout(()=>{
+          if(isAuthenticated()){
+            navigate('/user/dashboard')
+          }
+        },1500)
         
 
 
