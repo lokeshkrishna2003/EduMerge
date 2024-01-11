@@ -1,5 +1,3 @@
-
-
 .image-animation {
   width: 100%;
   height: 100%;
@@ -12,23 +10,27 @@
 }
 
 .login-image {
-  background-image: url('../../images/image1.png');
-
+  background-image: url("../../images/image1.png");
 }
 
 .signup-image {
-  background-image: url('../../images/image2.png');
+  background-image: url("../../images/image2.png");
 }
 
 @keyframes slideImage {
-  0% { left: 0;
-  transform: scaleZ(1.55);
-  transform: skewY(50deg); }
-  50% { left: 35%;
-  transform: scaleX(1.5);
-  transform: skew(20deg);
- }
-  100% { left: 75%;
-  transform: scaleZ(1.3);
-transform: skewZ(50deg); }
+  0% {
+    left: 0;
+    transform: scaleZ(1.55);
+    transform: skewY(50deg);
+  }
+  50% {
+    left: 35%;
+    transform: scaleX(1.5);
+    transform: skew(20deg);
+  }
+  100% {
+    left: 75%;
+    transform: scaleZ(1.3);
+    transform: skewZ(50deg);
+  }
 }
