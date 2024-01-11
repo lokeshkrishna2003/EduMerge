@@ -33,12 +33,12 @@ const PlaylistCard = ({ name, videoCount, onEdit ,onDelete ,onClickPlaylist }) =
 
       <div className="px-6 py-4">
         {hover ? (
-          <div className="flex justify-start items-center">
+          <div className="flex justify-start items-center" >
             <FiPlay  size={20} className="mr-2 mb-2 text-purple-500" data-aos='zoom-in' />
             <div className="font-bold text-xl mb-2" >{name}</div>
           </div>
         ) : (
-          <div className="font-bold text-xl mb-2">{name}</div>
+          <div className="font-bold text-xl mb-2" >{name}</div>
         )}
         <div className="text-sm text-gray-400">{videoCount} videos</div>
       </div>
