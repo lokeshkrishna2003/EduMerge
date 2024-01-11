@@ -162,70 +162,67 @@ const VideoPlayer = () => {
 
 
     return (
-        <div className="flex flex-col lg:flex-row bg-gradient-to-br from-gray-900 to-black min-h-screen">
-          <nav className="bg-gradient-to-br from-gray-900 to-black p-4 text-white">
+        <div className="flex flex-col bg-gradient-to-br from-gray-900 to-black min-h-screen">
+          {/* Navbar at the top */}
+          <nav className=" bg-gradient-to-br from-gray-700 to-black p-4 text-white fixed w-full z-10">
             <div className="container mx-auto flex justify-between items-center">
-              <span className="text-lg font-semibold hover:text-purple-300 transition duration-300 ease-in-out">
+              <span className="text-xl font-semibold hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
                 EduMerge Studio
               </span>
-              <div className="flex items-center">
-                <FiUser className="mr-2 text-purple-400 hover:text-purple-300 transition duration-300 ease-in-out" />
-                <span className="hover:text-purple-300 transition duration-300 ease-in-out">
-                  {userName}
-                </span>
+              <div className="flex items-center hover:text-purple-300 transition duration-300 ease-in-out cursor-pointer">
+                <FiUser className="mr-2 text-purple-400" />
+                <span>{userName}</span>
               </div>
             </div>
           </nav>
       
-          <div className="flex-grow">
-            <div className="container mx-auto p-4 flex flex-col lg:flex-row">
-              <div className="flex-grow lg:w-3/5" ref={playerRef} id="player-container">
-                {/* YouTube Player will be injected here by the YouTube Iframe API */}
-              </div>
-      
-              <div className="lg:w-2/5 mt-4 lg:mt-0 lg:ml-4">
-                <div className="mb-4">
-                  <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
-                          className="text-white bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
-                    <FiSkipBack size={24} />
-                  </button>
-                  <button onClick={() => changeVideo(currentVideoIndex + 1 >= playlist.links.length ? 0 : currentVideoIndex + 1)}
-                          className="text-white bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
-                    <FiSkipForward size={24} />
-                  </button>
+          {/* Main content */}
+          <div className="flex-grow pt-16"> {/* pt-16 to push the content below the fixed navbar */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4">
+              <div className="flex flex-col lg:flex-row">
+                {/* Video Player */}
+                <div className="lg:flex-grow" id="player-container" ref={playerRef}>
+                  {/* YouTube Player will be injected here by the YouTube Iframe API */}
                 </div>
       
-                <div className="mb-4">
-                  <label htmlFor="speed-control" className="text-white font-medium mr-2">Speed:</label>
-                  <input id="speed-control" type="range" min="0.25" max="2" step="0.25" value={playbackRate}
-                         onChange={(e) => changePlaybackRate(parseFloat(e.target.value))}
-                         className="range range-primary" />
-                  <span className="ml-2 text-white">{playbackRate.toFixed(2)}x</span>
-                </div>
+                {/* Playback Controls and Playlist */}
+                <div className="mt-4 lg:mt-0 lg:ml-4">
+                  {/* Playback Controls */}
+                  <div className="flex justify-center lg:justify-start gap-2 mb-4">
+                    <button onClick={() => changeVideo(currentVideoIndex - 1 < 0 ? playlist.links.length - 1 : currentVideoIndex - 1)}
+                            className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
+                      <FiSkipBack size={24} className="text-white" />
+                    </button>
+                    <button onClick={() => changeVideo(currentVideoIndex + 1 >= playlist.links.length ? 0 : currentVideoIndex + 1)}
+                            className="bg-purple-600 hover:bg-purple-800 p-2 rounded-full transition duration-300 ease-in-out">
+                      <FiSkipForward size={24} className="text-white" />
+                    </button>
+                  </div>
       
-                <div className="playlist-container bg-gray-800 p-4 rounded-lg">
-                  <h3 className="text-xl text-white font-semibold mb-5">
-                    {playlist?.name || 'Playlist'}
-                  </h3>
-                  <ul className="space-y-3">
-                    {playlist?.links.map((link, index) => (
-                      <li key={index}
-                          className={`p-2 rounded-md hover:bg-purple-600 transition duration-300 ease-in-out ${index === currentVideoIndex ? 'bg-purple-800' : ''}`}
-                          onClick={() => changeVideo(index)}>
-                        <span className="font-semibold text-white">{link.name}</span>
-                        <span className="text-gray-400 text-sm ml-2">
-                          <FiLink className="inline mr-1" />
-                          {link.url}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
+                  {/* Playlist */}
+                  <div className="bg-gray-800 p-4 rounded-lg overflow-y-auto max-h-96 lg:max-h-full">
+                    <h3 className="text-xl text-white font-semibold mb-5">{playlist?.name || 'Playlist'}</h3>
+                    <ul className="space-y-3">
+                      {playlist?.links.map((link, index) => (
+                        <li key={index} 
+                            className={`p-2 rounded-md hover:bg-purple-600 transition duration-300 ease-in-out ${index === currentVideoIndex ? 'bg-purple-800' : ''}`}
+                            onClick={() => changeVideo(index)}>
+                          <span className="font-semibold text-white">{link.name}</span>
+                          <span className="text-gray-400 text-sm ml-2">
+                            <FiLink className="inline mr-1" />
+                            {link.url}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       );
+      
       
 
                     }
