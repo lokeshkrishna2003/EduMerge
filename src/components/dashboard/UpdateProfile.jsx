@@ -98,7 +98,7 @@ navigate('/')
           </div>
           <button
             type="submit"
-            className="w-full bg-purple-500 text-white px-8 py-4 rounded-full hover:bg-purple-600 transition duration-300 flex items-center justify-center w-full text-lg"
+            className="w-full bg-purple-500 text-white px-8 py-4 rounded-full hover:bg-purple-600 transition duration-300 flex items-center justify-center text-lg"
           >
             Update
           </button>

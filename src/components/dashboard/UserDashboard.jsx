@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import PlaylistCard from "./PlaylistCard"; // Ensure correct path
 
 
+
 import { IoPersonCircle, IoLogOut, IoSettingsSharp } from "react-icons/io5";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,12 +13,14 @@ import "aos/dist/aos.css";
 import AOS from "aos";
 
 import isAuthenticated from "../../auth";
+import ProgressIndicator from "../loader/ProgressIndicator";
 
 
 AOS.init();
 
 const UserDashboard = () => {
     const [userName, setUsername] = useState("");
+    const [loading,setLoading] = useState(false)
     
     const navigate = useNavigate();
   const [showSettings, setShowSettings] = useState(false);
@@ -88,6 +91,7 @@ const UserDashboard = () => {
 
     const fetchPlaylists = async () => {
       const userId = localStorage.getItem('userId');
+      setLoading(true);
       if (userId) {
         try {
           const response = await axios.get(`http://localhost:3001/user/playlists/${userId}`);
@@ -96,6 +100,8 @@ const UserDashboard = () => {
         } catch (error) {
           console.error('Error fetching playlists', error);
           // Handle error appropriately
+        } finally {
+          setLoading(false);
         }
       }
     };
@@ -197,7 +203,8 @@ const UserDashboard = () => {
       <div className="mt-10 p-4">
         <h2 className="text-2xl mb-4">Your Playlists</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {playlists.length !== 0 ?(
+{loading?<ProgressIndicator/>:(<>
+  {playlists.length !== 0  ?(
             <>
             {playlists.map((playlist) => (
             
@@ -223,6 +230,9 @@ const UserDashboard = () => {
           <div className=" text-gray-500" data-aos='zoom-in'>No playlists found</div>
           </div>
           )}
+</>)}
+
+          
         </div>
 
         {/* Floating Action Button */}
