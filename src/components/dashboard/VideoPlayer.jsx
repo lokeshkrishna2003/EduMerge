@@ -94,6 +94,7 @@ const VideoPlayer = () => {
         onReady: (event) => {
           event.target.setPlaybackRate(playbackRate);
         },
+        onStateChange: onPlayerStateChange
       },
     });
   }
@@ -144,6 +145,18 @@ const VideoPlayer = () => {
       if (window.player && window.player.setPlaybackRate) {
         window.player.setPlaybackRate(rate);
       }
+    };
+
+
+    // Function to handle video end and play the next video
+    const onPlayerStateChange = (event) => {
+        if (event.data === window.YT.PlayerState.ENDED) {
+            let newIndex = currentVideoIndex + 1;
+            if (newIndex >= playlist.links.length) {
+                newIndex = 0; // Loop back to the first video
+            }
+            changeVideo(newIndex);
+        }
     };
 
 
