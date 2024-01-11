@@ -209,7 +209,10 @@ const UserDashboard = () => {
                 e.stopPropagation(); // stops propagation of parent element opening
                 handleEditPlaylist(playlist._id)
               } }
-              onDelete={() => handleDeletePlaylist(playlist._id)}
+              onDelete={(e) =>{
+                e.stopPropagation(); // stops propagation of parent element opening
+                handleDeletePlaylist(playlist._id)
+              } }
               onClickPlaylist={()=> handleClickPlaylist(playlist._id)}
             />
             
