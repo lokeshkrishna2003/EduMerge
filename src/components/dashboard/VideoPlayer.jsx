@@ -5,6 +5,8 @@ import { FiSkipBack, FiSkipForward, FiUser, FiLink ,FiHome} from "react-icons/fi
 import AOS from "aos";
 import "aos/dist/aos.css";
 import isAuthenticated from "../../auth";
+import ProgressIndicator from "../loader/ProgressIndicator";
+
 
 AOS.init();
 
@@ -16,11 +18,13 @@ const VideoPlayer = () => {
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
   const [userName, setUserName] = useState("");
   const [playbackRate, setPlaybackRate] = useState(1);
+  const [loading,setLoading] = useState(false)
   const playerRef = React.createRef();
 
   // Fetch playlist and user data on component mount
   useEffect(() => {
     const fetchPlaylist = async () => {
+        setLoading(true)
       try {
         const response = await axios.get(
           `http://localhost:3001/user/playlist/${playlistId}`
@@ -38,7 +42,7 @@ const VideoPlayer = () => {
         }
       } catch (error) {
         console.error("Error fetching playlist", error);
-      }
+      }finally{setLoading(false)}
     };
 
     const fetchUserData = async () => {
@@ -281,8 +285,10 @@ const handleDashboardClick = () => {
             
             
             {/* Playlist */}
-            <div className="lg:max-w-md bg-gray-800 p-4 rounded-lg overflow-y-auto">
-              <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName
+            
+              {loading?<ProgressIndicator/>:(<>
+                <div className="lg:max-w-md bg-gray-800 p-4 rounded-lg overflow-y-auto">
+                <h3 className="text-xl text-white font-semibold mb-5">{playlist?.playlistName
  || 'Playlist'}</h3>
               <ul className="space-y-3">
                 {playlist?.links.map((link, index) => (
@@ -297,7 +303,10 @@ const handleDashboardClick = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+              </div>
+              
+              </>)}
+            
           </div>
         </div>
       </div>
