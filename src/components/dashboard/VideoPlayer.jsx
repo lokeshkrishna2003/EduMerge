@@ -255,7 +255,7 @@ const VideoPlayer = () => {
                   <li key={index} 
                       className={`p-2 rounded-m bg-gray-700 hover:bg-gray-600 rounded-md cursor-pointer transition duration-300 ease-in-out ${index === currentVideoIndex ? 'bg-gray-900' : ''}`}
                       onClick={() => changeVideo(index)}>
-                    <span className="font-semibold text-white">{link.name}</span>
+                    <span className="font-semibold text-white">{link.name} - </span>
                     <span className="text-gray-400 text-sm ml-2">
                       <FiLink className="inline mr-1" />
                       {link.url}
