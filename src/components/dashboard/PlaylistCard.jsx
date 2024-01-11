@@ -19,22 +19,22 @@ const PlaylistCard = ({ name, videoCount, onEdit ,onDelete ,onClickPlaylist }) =
       <div className="absolute top-2 right-2 flex gap-2">
         <button
           onClick={onEdit}
-          className="text-white rounded-full p-1 hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-110"
+          className="text-white rounded-full p-1 hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
         >
-          <FiEdit className='text-purple-500' size={15} />
+          <FiEdit className='text-purple-500 hover:text-white' size={15} />
         </button>
         <button
               onClick={onDelete}
-              className="text-white rounded-full p-1 hover:bg-gray-600 transition duration-300 ease-in-out transform hover:scale-110"
+              className="text-white rounded-full p-1 hover:bg-gray-800 transition duration-300 ease-in-out transform hover:scale-110"
             >
-              <FiTrash className='text-purple-500' size={15} />
+              <FiTrash className='text-purple-500  hover:text-white' size={15} />
             </button>
       </div>
 
       <div className="px-6 py-4">
         {hover ? (
           <div className="flex justify-start items-center">
-            <FiPlay  size={20} className="mr-2 mb-1 text-purple-500" data-aos='zoom-in' />
+            <FiPlay  size={20} className="mr-2 mb-2 text-purple-500" data-aos='zoom-in' />
             <div className="font-bold text-xl mb-2" >{name}</div>
           </div>
         ) : (
