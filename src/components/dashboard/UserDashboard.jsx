@@ -139,19 +139,19 @@ const UserDashboard = () => {
         <div className="flex items-center">
           <IoPersonCircle
             size={30}
-            className="mr-2 hover:rotate-12 transition-transform duration-300"
+            className="mr-2 hover:rotate-12 hover:scale-105 text-purple-500 transition-transform duration-300"
           />
-          <span className="hover:scale-105 transition-transform duration-300">
+          <span className="hover:scale-110  transition-transform duration-300">
             {userName}
           </span>
         </div>
         <div className="flex gap-10 relative" ref={settingsRef}>
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className="flex items-center text-white hover:text-gray-300 transition duration-300"
+            className="flex items-center hover:text-white text-gray-500  transition duration-300"
           >
-            <IoSettingsSharp size={20} className="mr-2" />
-            Settings
+            <IoSettingsSharp size={30} className="mr-2 hover:-rotate-45 hover:scale-110 text-purple-500" />
+            
           </button>
           {showSettings && (
             <div className="absolute right-[6rem] mt-12 py-5 w-48 border-1 bg-gradient-to-br from-gray-900 to-black rounded-lg shadow-xl transition-all ease-in-out duration-300">
