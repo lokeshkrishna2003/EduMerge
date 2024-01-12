@@ -58,7 +58,9 @@ const UserDashboard = () => {
   };
 
   const handleClickPlaylist = (playlistId) => {
-    navigate(`/video-player/${playlistId}`);
+    if(isAuthenticated()){
+      navigate(`/video-player/${playlistId}`);
+    }
   };
 
   // Close settings dropdown when clicking outside
