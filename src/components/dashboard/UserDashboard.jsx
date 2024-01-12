@@ -48,11 +48,17 @@ const UserDashboard = () => {
     if(isAuthenticated()){
       navigate(`/edit-playlist/${playlistId}`);
     }
+    else{
+      navigate('/')
+    }
   };
 
   const handleDeletePlaylist = (playlistId) => {
     if(isAuthenticated()){
       navigate(`/delete-playlist/${playlistId}`);
+    }
+    else{
+      navigate('/')
     }
   };
 
@@ -60,12 +66,17 @@ const UserDashboard = () => {
     //navigating to create playlist page
     if(isAuthenticated()){
       navigate("/user/create-playlist");
+    }else{
+      navigate('/')
     }
   };
 
   const handleClickPlaylist = (playlistId) => {
     if(isAuthenticated()){
       navigate(`/video-player/${playlistId}`);
+    }
+    else{
+      navigate('/')
     }
   };
 
