@@ -45,7 +45,9 @@ const UserDashboard = () => {
     // Handle the edit action with the specific playlistId
     console.log(`Edit playlist with id ${playlistId}`);
     // You can navigate to the edit page or perform any other action
-    navigate(`/edit-playlist/${playlistId}`);
+    if(isAuthenticated()){
+      navigate(`/edit-playlist/${playlistId}`);
+    }
   };
 
   const handleDeletePlaylist = (playlistId) => {
