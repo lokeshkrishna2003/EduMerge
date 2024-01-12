@@ -99,7 +99,7 @@ const EditPlaylist = ({ match }) => {
         if (isAuthenticated()) {
           navigate("/user/dashboard");
         }
-      }, 1500);
+      }, 1200);
     } catch (error) {
       console.error("Error updating playlist", error);
       // Handle error appropriately

@@ -42,7 +42,7 @@ const ChangePassword = () => {
       // Redirect to the landingpage after succesful changing of password
       setTimeout(() => {
         navigate("/");
-      }, 1500);
+      }, 1200);
       //clearing the local storage after changing the password
       localStorage.clear();
     } catch (error) {

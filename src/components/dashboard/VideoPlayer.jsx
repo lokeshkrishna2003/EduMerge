@@ -192,11 +192,11 @@ const VideoPlayer = () => {
     if (isAuthenticated()) {
       setTimeout(() => {
         navigate("/user/dashboard"); // routing to our dashboard
-      }, 1500);
+      }, 1000);
     } else {
       setTimeout(() => {
         navigate("/auth?mode=login"); // routing to our landing page
-      }, 1500);
+      }, 1000);
     }
   };
 

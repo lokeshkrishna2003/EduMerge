@@ -42,7 +42,7 @@ const DeletePlaylist = () => {
         if (isAuthenticated()) {
           navigate("/user/dashboard");
         }
-      }, 1500);
+      }, 1200);
     } catch (error) {
       setError("Failed to delete playlist. " + (error.response?.data || ""));
     }

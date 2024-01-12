@@ -49,10 +49,10 @@ const DeleteAccount = () => {
       localStorage.removeItem("userId");
       // Redirect to the login page or landing page
       setTimeout(() => {
-        if (isAuthenticated()) {
+        
           navigate("/");
-        }
-      }, 1500);
+        
+      }, 1200);
     } catch (error) {
       setError("Failed to delete account. " + (error.response?.data || ""));
     }

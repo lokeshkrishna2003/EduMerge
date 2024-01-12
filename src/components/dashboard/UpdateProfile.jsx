@@ -59,7 +59,7 @@ const UpdateProfile = () => {
         if (isAuthenticated()) {
           navigate("/user/dashboard");
         }
-      }, 1500);
+      }, 1200);
     } catch (error) {
       setError("Failed to update profile");
       console.error("Error updating profile:", error);
