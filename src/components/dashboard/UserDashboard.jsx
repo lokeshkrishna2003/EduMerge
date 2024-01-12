@@ -54,7 +54,9 @@ const UserDashboard = () => {
 
   const handleCreatePlaylist = () => {
     //navigating to create playlist page
-    navigate("/user/create-playlist");
+    if(isAuthenticated()){
+      navigate("/user/create-playlist");
+    }
   };
 
   const handleClickPlaylist = (playlistId) => {
