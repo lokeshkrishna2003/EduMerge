@@ -49,7 +49,9 @@ const UserDashboard = () => {
   };
 
   const handleDeletePlaylist = (playlistId) => {
-    navigate(`/delete-playlist/${playlistId}`);
+    if(isAuthenticated()){
+      navigate(`/delete-playlist/${playlistId}`);
+    }
   };
 
   const handleCreatePlaylist = () => {
