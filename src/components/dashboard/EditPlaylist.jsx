@@ -35,7 +35,7 @@ const EditPlaylist = ({ match }) => {
 
       try {
         const response = await axios.get(
-          `http://localhost:3001/user/playlist/${playlistId}`
+          `https://edumerge-studio-backend.onrender.com/user/playlist/${playlistId}`
         );
         const { playlistName, links } = response.data;
         setPlaylistName(playlistName);

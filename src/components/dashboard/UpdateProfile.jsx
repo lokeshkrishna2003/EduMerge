@@ -15,7 +15,7 @@ const UpdateProfile = () => {
     if (userId) {
       // Fetch existing user data from the backend
       axios
-        .get(`http://localhost:3001/user/${userId}`)
+        .get(`https://edumerge-studio-backend.onrender.com/user/${userId}`)
         .then((response) => {
           setUserData({
             username: response.data.username,

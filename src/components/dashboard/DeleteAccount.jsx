@@ -40,7 +40,7 @@ const DeleteAccount = () => {
     try {
       const userId = localStorage.getItem("userId");
       await axios.delete(
-        `http://localhost:3001/user/delete-account/${userId}`,
+        `https://edumerge-studio-backend.onrender.com/user/delete-account/${userId}`,
         { data: { userId } }
       );
 
