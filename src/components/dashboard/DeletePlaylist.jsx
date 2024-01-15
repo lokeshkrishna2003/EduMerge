@@ -14,7 +14,7 @@ const DeletePlaylist = () => {
     const fetchPlaylistData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/user/playlist/${playlistId}`
+          `https://edumerge-studio-backend.onrender.com/user/playlist/${playlistId}`
         );
         setPlaylistData({
           name: response.data.playlistName,
@@ -35,7 +35,7 @@ const DeletePlaylist = () => {
 
     try {
       await axios.delete(
-        `http://localhost:3001/user/delete-playlist/${playlistId}`
+        `https://edumerge-studio-backend.onrender.com/user/delete-playlist/${playlistId}`
       );
       // Redirect to the user dashboard or appropriate page
       setTimeout(() => {

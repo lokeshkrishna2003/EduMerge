@@ -86,7 +86,7 @@ const EditPlaylist = ({ match }) => {
 
     try {
       await axios.put(
-        `http://localhost:3001/user/edit-playlist/${playlistId}`,
+        `https://edumerge-studio-backend.onrender.com/user/edit-playlist/${playlistId}`,
         {
           userId,
           playlistName,

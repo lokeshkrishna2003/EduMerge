@@ -50,7 +50,7 @@ const UpdateProfile = () => {
     }
     try {
       const response = await axios.put(
-        `http://localhost:3001/user/update-profile/${userId}`,
+        `https://edumerge-studio-backend.onrender.com/user/update-profile/${userId}`,
         userData
       );
       setSuccess("Profile updated successfully");

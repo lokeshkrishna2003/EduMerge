@@ -57,7 +57,7 @@ const CreatePlaylist = () => {
     }
     try {
       const response = await axios.post(
-        `http://localhost:3001/user/create-playlist/${userId}`,
+        `https://edumerge-studio-backend.onrender.com/user/create-playlist/${userId}`,
         {
           userId: userId,
           playlistName: playlistName,

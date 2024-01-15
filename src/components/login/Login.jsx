@@ -31,7 +31,7 @@ const Login = () => {
     setLoading(true); // Set loading state to true
     try {
       const response = await axios.post(
-        "http://localhost:3001/login",
+        "https://edumerge-studio-backend.onrender.com/login",
         credentials
       );
       localStorage.setItem("userId", response.data.userId); // Store userId in localStorage

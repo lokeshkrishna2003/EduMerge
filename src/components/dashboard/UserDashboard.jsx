@@ -108,7 +108,7 @@ const UserDashboard = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3001/user/playlists/${userId}`
+            `https://edumerge-studio-backend.onrender.com/user/playlists/${userId}`
           );
           setPlaylists(response.data);
           console.log(response.data);
@@ -139,7 +139,7 @@ const UserDashboard = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3001/user/${userId}`
+            `https://edumerge-studio-backend.onrender.com/user/${userId}`
           );
           setUsername(response.data.username); // Assuming the username field is called 'username'
         } catch (error) {

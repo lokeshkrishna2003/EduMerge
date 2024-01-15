@@ -32,7 +32,7 @@ const VideoPlayer = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:3001/user/playlist/${playlistId}`
+          `https://edumerge-studio-backend.onrender.com/user/playlist/${playlistId}`
         );
         // Ensure that the response contains the links and that they all have URLs
         if (
@@ -57,7 +57,7 @@ const VideoPlayer = () => {
       if (userId) {
         try {
           const response = await axios.get(
-            `http://localhost:3001/user/${userId}`
+            `https://edumerge-studio-backend.onrender.com/user/${userId}`
           );
           setUserName(response.data.username);
         } catch (error) {
@@ -331,7 +331,7 @@ const VideoPlayer = () => {
                           index === currentVideoIndex ? "bg-gray-900" : ""
                         }`}
                         onClick={() => changeVideo(index)}
-                        data-aos="zoom-in"
+                        
                       >
                         <span className="font-semibold text-white">
                           {link.name} -{" "}

@@ -31,7 +31,7 @@ const ChangePassword = () => {
     try {
       const userId = localStorage.getItem("userId");
 
-      await axios.put(`http://localhost:3001/user/change-password/${userId}`, {
+      await axios.put(`https://edumerge-studio-backend.onrender.com/user/change-password/${userId}`, {
         userId,
         ...passwordData,
       });
