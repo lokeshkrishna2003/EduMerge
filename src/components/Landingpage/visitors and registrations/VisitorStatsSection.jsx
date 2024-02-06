@@ -7,19 +7,23 @@ const VisitorStatsSection = () => {
   const [registrationCount, setRegistrationCount] = useState(678); // Mock registration count
 
   useEffect(() => {
-    // Simulate fetching data from an API
-    fetch('https://edumerge-studio-backend.onrender.com/users').then(response=>{
-      if(!response.ok){
-        throw Error(response.statusText);
+    // Replace 'http://localhost:3000/api/users' with your actual backend URL
+    fetch('https://edumerge-studio-backend.onrender.com/users')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Failed to fetch.');
+        }
         return response.json();
-      }
-    }).then(data=>{
-      setRegistrationCount(data.length);
-    setVisitorCount(data.length+17);
-
-    })
-    // Replace the following with actual API calls
-    
+      })
+      .then(data => {
+        console.log(data)
+        visitorCount(16+data.length)
+        registrationCount(data.length)
+      })
+      .catch(err => {
+        setError(err.message);
+        
+      });
   }, []);
 
   return (
