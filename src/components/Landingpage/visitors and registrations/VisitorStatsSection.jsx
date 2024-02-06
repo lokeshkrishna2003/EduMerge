@@ -13,7 +13,7 @@ useEffect(()=>{
         setVisitorCount(18)
         setRegistrationCount(8)
       }
-      setVisitorCount(users.length+14)
+      setVisitorCount(users.length+11)
       setRegistrationCount(users.length)
     })
   })
