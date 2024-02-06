@@ -6,25 +6,18 @@ const VisitorStatsSection = () => {
   const [visitorCount, setVisitorCount] = useState(12345); // Mock visitor count
   const [registrationCount, setRegistrationCount] = useState(678); // Mock registration count
 
-  useEffect(() => {
-    // Replace 'http://localhost:3000/api/users' with your actual backend URL
-    fetch('https://edumerge-studio-backend.onrender.com/users')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch.');
-        }
-        return response.json();
-      })
-      .then(data => {
-
-        visitorCount(16+data.length)
-        registrationCount(data.length)
-      })
-      .catch(err => {
-        setError(err.message);
-        
-      });
-  }, []);
+useEffect(()=>{
+  fetch('https://edumerge-studio-backend.onrender.com/users').then((response)=>{
+    response.json().then((users)=>{
+      if(!users || !users.length){
+        setVisitorCount(18)
+        setRegistrationCount(8)
+      }
+      setVisitorCount(users.length+14)
+      setRegistrationCount(users.length)
+    })
+  })
+})
 
   return (
     <div className="bg-gradient-to-r from-gray-900 to-black text-white text-center py-4 flex justify-around items-center">
