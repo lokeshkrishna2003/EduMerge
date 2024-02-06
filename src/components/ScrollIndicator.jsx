@@ -8,11 +8,11 @@ const ScrollIndicator = () => {
 
   // Define non-scrollable routes
   const nonScrollableRoutes = [
-    "auth?mode=login",
-    "/sauth?mode=signup",
+    "/auth",
     "/user/update-profile",
     "/user/change-password",
     "/user/delete-account",
+    "/user/dashboard",
   ];
 
   useEffect(() => {
