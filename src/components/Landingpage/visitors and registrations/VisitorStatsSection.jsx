@@ -8,9 +8,18 @@ const VisitorStatsSection = () => {
 
   useEffect(() => {
     // Simulate fetching data from an API
+    fetch('https://edumerge-studio-backend.onrender.com/users').then(response=>{
+      if(!response.ok){
+        throw Error(response.statusText);
+        return response.json();
+      }
+    }).then(data=>{
+      setRegistrationCount(data.length);
+    setVisitorCount(data.length+17);
+
+    })
     // Replace the following with actual API calls
-    setVisitorCount(12345);
-    setRegistrationCount(678);
+    
   }, []);
 
   return (
