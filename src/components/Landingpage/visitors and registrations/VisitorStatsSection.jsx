@@ -16,7 +16,7 @@ const VisitorStatsSection = () => {
         return response.json();
       })
       .then(data => {
-        console.log(data)
+
         visitorCount(16+data.length)
         registrationCount(data.length)
       })
