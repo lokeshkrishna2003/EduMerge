@@ -45,38 +45,35 @@ const UserDashboard = () => {
     // Handle the edit action with the specific playlistId
     console.log(`Edit playlist with id ${playlistId}`);
     // You can navigate to the edit page or perform any other action
-    if(isAuthenticated()){
+    if (isAuthenticated()) {
       navigate(`/edit-playlist/${playlistId}`);
-    }
-    else{
-      navigate('/')
+    } else {
+      navigate("/");
     }
   };
 
   const handleDeletePlaylist = (playlistId) => {
-    if(isAuthenticated()){
+    if (isAuthenticated()) {
       navigate(`/delete-playlist/${playlistId}`);
-    }
-    else{
-      navigate('/')
+    } else {
+      navigate("/");
     }
   };
 
   const handleCreatePlaylist = () => {
     //navigating to create playlist page
-    if(isAuthenticated()){
+    if (isAuthenticated()) {
       navigate("/user/create-playlist");
-    }else{
-      navigate('/')
+    } else {
+      navigate("/");
     }
   };
 
   const handleClickPlaylist = (playlistId) => {
-    if(isAuthenticated()){
+    if (isAuthenticated()) {
       navigate(`/video-player/${playlistId}`);
-    }
-    else{
-      navigate('/')
+    } else {
+      navigate("/");
     }
   };
 
@@ -162,8 +159,7 @@ const UserDashboard = () => {
             className="mr-2 hover:rotate-12 hover:scale-105 text-purple-500 transition-transform duration-300"
           />
           <span className="hover:scale-110  transition-transform duration-300">
-            <span className="username-start">{userName.substring(0, 3)}</span>
-            <span className="username-rest">{userName.substring(3)}</span>
+            {userName}
           </span>
         </div>
         <div className="flex gap-10 relative" ref={settingsRef}>
