@@ -162,7 +162,8 @@ const UserDashboard = () => {
             className="mr-2 hover:rotate-12 hover:scale-105 text-purple-500 transition-transform duration-300"
           />
           <span className="hover:scale-110  transition-transform duration-300">
-            {userName}
+            <span className="username-start">{userName.substring(0, 3)}</span>
+            <span className="username-rest">{userName.substring(3)}</span>
           </span>
         </div>
         <div className="flex gap-10 relative" ref={settingsRef}>
